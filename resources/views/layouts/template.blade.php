@@ -10,6 +10,8 @@
     <title>StockPRO</title>
 </head>
 <body>
-    <h1>Teste view</h1>
+    @include('layouts.components.header')
+    @yield('content')
+    @include('layouts.components.footer')
 </body>
 </html>
