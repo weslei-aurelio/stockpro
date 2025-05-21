@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.guest')
 
 @section('content')
     <div class="container">
-        <h1>Criar usuário</h1>
+        <h1>Realizar cadastro</h1>
         <form action="{{ route('register') }}" method="POST">
             @csrf
             <div class="mb-3">
