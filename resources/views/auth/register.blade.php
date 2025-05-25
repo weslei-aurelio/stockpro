@@ -46,33 +46,44 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-floating mb-3">
-                <input
-                    type="password"
-                    name="password"
-                    class="form-control @error('password') is-invalid @enderror"
-                    id="floatingInput"
-                    placeholder="Senha"
-                >
-                <label class="floatingInput">Senha</label>
+            <div class="form-floating mb-3 position-relative">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="passwordField" placeholder="Senha">
+                <label for="passwordField">Senha</label>
+                <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword('passwordField', this)">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
                 @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-             <div class="form-floating mb-3">
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    class="form-control"
-                    id="floatingInput"
-                    placeholder="Confirmar Senha"
-                >
-                <label class="floatingInput">Confirmar Senha</label>
+            <div class="form-floating mb-3 position-relative">
+                <input type="password" name="password_confirmation" class="form-control" id="confirmPasswordField" placeholder="Confirmar Senha">
+                <label for="confirmPasswordField">Confirmar Senha</label>
+                <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword('confirmPasswordField', this)">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
             </div>
             <button type="submit" class="btn btn-primary text-white w-100 py-3">Cadastrar</button>
         </div>
             </form>
     </div>
+
+<!-- Script para alternar senha e ícone -->
+<script>
+function togglePassword(fieldId, toggleElement) {
+    const passwordInput = document.getElementById(fieldId);
+    const icon = toggleElement.querySelector('i');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // Mostra senha
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password'; // Oculta senha
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+</script>
+
 @endsection

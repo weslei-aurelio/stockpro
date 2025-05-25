@@ -17,7 +17,7 @@
         <form action="{{ route('password.email') }}" method="POST">
             @csrf
             <img class="mx-auto d-block mb-3" src="/images/logo.png" alt="StockPRO" class="mb-4">
-            <h1 class="h3 mb-3 fw-normal text-center">Resetar senha</h1>
+            <h1 class="h3 mb-3 fw-normal text-center">Resetar Senha</h1>
             <div class="form-floating mb-3">
                 <input
                     type="email"

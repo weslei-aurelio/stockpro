@@ -32,3 +32,22 @@ html, body {
 .form-container label {
   font-size: 1.2rem; 
 }
+
+.form-floating {
+    position: relative; // já usado para posicionar o toggle
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #6c757d; // cor neutra
+    user-select: none; // evita seleção de texto
+}
+
+.toggle-password:hover {
+    color: #000; // cor mais escura no hover
+}

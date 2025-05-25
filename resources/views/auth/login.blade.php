@@ -20,9 +20,12 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-floating mb-3">
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="floatingInput" placeholder="Senha">
-                <label for="floatingInput">Senha</label>
+           <div class="form-floating mb-3 position-relative">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword" placeholder="Senha">
+                <label for="floatingPassword">Senha</label>
+                <span class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()">
+                <i class="fa-solid fa-eye"></i> <!-- Ícone inicial -->
+                </span>
                 @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -37,4 +40,22 @@
         </form>
     </div>
 </div>
+
+<script>
+function togglePassword() {
+    const passwordInput = document.getElementById('floatingPassword');
+    const toggleIcon = document.querySelector('.toggle-password i');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; 
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password'; 
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    }
+}
+</script>
+
 @endsection
