@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid d-flex align-items-center justify-content-center">
         <h1 class="text-center my-5">Resetar senha</h1>
         <form action="{{ route('password.update') }}" method="POST">
             @csrf

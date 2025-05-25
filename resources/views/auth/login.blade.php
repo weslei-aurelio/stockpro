@@ -1,11 +1,13 @@
 @extends('layouts.guest')
 
+@section('title', 'Login | StockPRO')
+
 @push('login-css')
 @vite('resources/scss/login.scss')
 @endpush
 
 @section('content')
-<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
+<div class="container-fluid d-flex align-items-center justify-content-center">
     <div class="form-container">
         <form action="{{ route('login') }}" method="POST">
             @csrf

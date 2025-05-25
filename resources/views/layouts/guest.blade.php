@@ -9,7 +9,9 @@
         <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
         @vite('resources/scss/styles.scss')
         @stack('login-css')
-        <title>Login | StockPRO</title>
+        @stack('register-css')
+        @stack('forgot_password-css')
+        <title>@yield('title')</title>
     </head>
     <body>
         @yield('content')
