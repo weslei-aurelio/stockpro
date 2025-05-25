@@ -8,3 +8,5 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
+ 
+<h1></h1>
