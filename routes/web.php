@@ -7,6 +7,3 @@ Route::middleware(['auth'])->group(function(){
         return view('dashboard.index');
     });
 });
-
- 
-<h1></h1>
