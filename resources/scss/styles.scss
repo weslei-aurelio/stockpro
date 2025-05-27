@@ -1,1 +1,6 @@
-@import "bootstrap/scss/bootstrap";
+@import "themes";
+@import "bootstrap/scss/bootstrap";  
+
+body {
+  font-family: "League Spartan", sans-serif;
+}

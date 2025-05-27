@@ -7,6 +7,10 @@ export default defineConfig({
             input:
             [
                 'resources/scss/styles.scss',
+                'resources/scss/login.scss',
+                'resources/scss/register.scss',
+                'resources/scss/forgot_password.scss',
+                'resources/scss/themes.scss',
                 'resources/js/main.js'
             ],
             refresh: true,
