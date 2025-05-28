@@ -11,7 +11,7 @@
 
         @include('layouts.components.header')
         @yield('content')
-        @include('layouts.components.footer')
+        {{-- @include('layouts.components.footer') --}}
 
         <!-- Realizando import do Bootstrap -->
         @vite('resources/js/main.js')

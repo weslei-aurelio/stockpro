@@ -6,14 +6,18 @@
             {{ $value }}
         </div>
     @endsession
-    <h1 class="text-center">Usuários | StockPRO</h1>
+    <div class="container mt-5 d-flex justify-content-end">
+        <a href="{{ route('users.create') }}" class="btn btn-primary">Novo usuário</a>
+    </div>
     <div class="container mt-5">
+        <h1 class="text-center">Usuários | StockPRO</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">E-mail</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -23,6 +27,7 @@
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <th scope="col">#</th>
                         <td>
                             <a href="/users/{{ $user->id }}" class="btn btn-primary btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm">Inativar</a>
