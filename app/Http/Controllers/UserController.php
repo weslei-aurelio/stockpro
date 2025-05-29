@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -54,5 +55,17 @@ class UserController extends Controller
         return redirect()
             ->route('users.index')
             ->with('status', 'Usuário cadastrado com sucesso!');
+    }
+
+    public function delete(User $user) 
+    {
+        $user = User::where('id', $user->id)->first();
+        $user->status_id = Status::SUSPENSO;
+
+        $user->save();
+        return redirect()
+            ->route('users.index')
+            ->with('status', 'Usuário inativado com sucesso!');
+
     }
 }

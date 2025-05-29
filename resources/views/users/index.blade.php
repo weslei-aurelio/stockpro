@@ -27,10 +27,22 @@
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <th scope="col">#</th>
+                        <th scope="col">{{ $user->status->name }}</th>
                         <td>
-                            <a href="/users/{{ $user->id }}" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="#" class="btn btn-danger btn-sm">Inativar</a>
+                            <a 
+                                href="/users/{{ $user->id }}" 
+                                class="btn btn-primary btn-sm">
+                                Editar
+                        </a> 
+                            <form 
+                                action="{{ url('users/' . $user->id . '/inactivate') }}" 
+                                method="POST" 
+                                style="display:inline;"
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Inativar</button>
+                            </form>
                         </td>
                     </tr>
                @endforeach

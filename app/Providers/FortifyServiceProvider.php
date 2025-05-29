@@ -13,6 +13,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use \App\Models\User;
+use \App\Models\Status;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,17 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+            
+            if ($user->status_id == Status::SUSPENSO) {
+                return null;
+            }
+
+            return $user;
+        });
+
+
         Fortify::loginView(function(){
             return view('auth.login');
         });
