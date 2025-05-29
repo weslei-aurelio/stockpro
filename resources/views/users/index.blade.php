@@ -33,16 +33,27 @@
                                 href="/users/{{ $user->id }}" 
                                 class="btn btn-primary btn-sm">
                                 Editar
-                        </a> 
-                            <form 
-                                action="{{ url('users/' . $user->id . '/inactivate') }}" 
-                                method="POST" 
-                                style="display:inline;"
-                            >
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Inativar</button>
-                            </form>
+                            </a>
+                            @if ($user->status_id == 1)
+                                <form 
+                                    action="{{ url('users/' . $user->id . '/inactivate') }}" 
+                                    method="POST" 
+                                    style="display:inline;"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Inativar</button>
+                                </form>
+                            @else
+                                <form 
+                                    action="{{ url('users/' . $user->id . '/activate') }}" 
+                                    method="POST" 
+                                    style="display:inline;"
+                                >
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Ativar</button>
+                                </form>
+                            @endif  
                         </td>
                     </tr>
                @endforeach

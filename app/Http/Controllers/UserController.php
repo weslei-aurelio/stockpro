@@ -57,7 +57,7 @@ class UserController extends Controller
             ->with('status', 'Usuário cadastrado com sucesso!');
     }
 
-    public function delete(User $user) 
+    public function inactivate(User $user) 
     {
         $user = User::where('id', $user->id)->first();
         $user->status_id = Status::SUSPENSO;
@@ -68,4 +68,16 @@ class UserController extends Controller
             ->with('status', 'Usuário inativado com sucesso!');
 
     }
+
+    public function activate(User $user) 
+    {
+        $user = User::where('id', $user->id)->first();
+        $user->status_id = Status::ATIVO;
+
+        $user->save();
+        return redirect()
+            ->route('users.index')
+            ->with('status', 'Usuário ativado com sucesso!');
+    }
+
 }
