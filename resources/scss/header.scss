@@ -1,0 +1,22 @@
+#logo {
+    width: 200px;
+    height: 90px;
+    margin-left: 1rem;
+}
+
+.navbar {
+    border-radius: 1.5rem;
+    margin-top: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.dropdown-toggle.no-border {
+    background-color: transparent !important; 
+    border: none !important; 
+    padding: 0 !important;
+}
+.dropdown-toggle.no-border:focus, 
+.dropdown-toggle.no-border:active {
+    box-shadow: none !important;
+}

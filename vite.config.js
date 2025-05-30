@@ -11,6 +11,8 @@ export default defineConfig({
                 'resources/scss/register.scss',
                 'resources/scss/forgot_password.scss',
                 'resources/scss/themes.scss',
+                'resources/scss/index.scss',
+                'resources/scss/header.scss',
                 'resources/js/main.js'
             ],
             refresh: true,
