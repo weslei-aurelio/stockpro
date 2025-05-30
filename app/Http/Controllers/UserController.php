@@ -44,10 +44,13 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge(['status_id' => Status::ATIVO]);
+
         $input = $request->validate([
             'name'      => 'required|string',
             'email'     => 'required|email',
-            'password'  => 'required|min:6'
+            'password'  => 'required|min:6',
+            'status_id' => 'required|integer'
         ]);
 
         User::create($input);
