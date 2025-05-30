@@ -9,7 +9,9 @@ class BrandController extends Controller
 {
     public function index () 
     {
-        return view('brands.index');
+        $brands = Brand::all();
+
+        return view('brands.index', compact('brands'));
     }
 
     public function create ()
@@ -28,6 +30,16 @@ class BrandController extends Controller
         return redirect()
             ->route('brands.index')
             ->with('status', 'Marca cadastrada com sucesso!');
+
+    }
+
+    public function inactivate() 
+    {
+
+    }
+
+    public function activate() 
+    {
 
     }
 }

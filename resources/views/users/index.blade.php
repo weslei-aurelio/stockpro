@@ -24,10 +24,10 @@
             <tbody>
                @foreach ($users as $user)
                     <tr>
-                        <th scope="row">{{ $user->id }}</th>
+                    <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <th scope="col">{{ $user->status->name }}</th>
+                        <th>{{ $user->status->name }}</th>
                         <td>
                             <a 
                                 href="/users/{{ $user->id }}" 
