@@ -1,9 +1,36 @@
 /* Gerais */
 
 .container{
-    padding: 20px;
+    padding: 0px;
 }
 
-.custom_table{
-    background-color: #ff0000;
+custom-table{
+    background-color: #f5f5f5;
+}
+
+.custom-table th{
+    background-color: #f5f5f5;
+    padding: 1.5rem;
+    // border-radius: 1.5rem;
+}
+
+.custom-table td {
+    background-color: #f5f5f5;
+    // border-radius: 1.5rem;
+    padding: 1.5rem;
+}
+
+.custom-table tr{
+    padding: 1.5rem;
+    background-color: #f5f5f5;
+    border-radius: 1.5rem;
+}
+
+.custom-button {
+    padding: 0.7rem 0.7rem;
+    border-radius: 0.5rem;
+}
+
+svg{
+    color: white;
 }

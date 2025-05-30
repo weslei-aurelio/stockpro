@@ -5,17 +5,15 @@
 <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand">
-            <img src="/images/logo.png" alt="StockPro" id="logo">
+            <img src="/images/logo_header.png" alt="StockPro" id="logo">
         </a>
          <div class="d-flex align-items-center">
-        <h2 class="mb-0 me-4">Distribuidora JR</h2>
+        <h2 class="mb-0 me-4 text-white">Distribuidora JR</h2>
         <div class="btn-group">
             <button type="button" class="dropdown-toggle no-border" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 16 16">
-                    <g fill="currentColor">
-                        <path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </g>
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                 </svg>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -31,7 +29,7 @@
     </div>
 </div>
 </nav>
-<div class="container-fluid bg-light px-4 py-2">
+<div class="container-fluid px-4 py-2">
     <button class="btn btn-outline-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
         ☰
     </button>
