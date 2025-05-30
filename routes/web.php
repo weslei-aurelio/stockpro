@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,10 @@ Route::middleware(['auth'])->group(function(){
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}/inactivate',   [UserController::class, 'inactivate'])->name('users.inactivate');
     Route::post('/users/{user}/activate',       [UserController::class, 'activate'])->name('users.activate');
- 
+
+    Route::get('/brands/create',    [BrandController::class, 'create'])->name('brands.create');
+    Route::post('/brands/create',   [BrandController::class, 'store'])->name('brands.store');
+    Route::get('/brands',           [BrandController::class, 'index'])->name('brands.index');
+    
 });
 
