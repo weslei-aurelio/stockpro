@@ -13,6 +13,9 @@
                     <a class="nav-link" href="{{ route('users.index') }}">Usuários</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('brands.index') }}">Marcas</a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit">Logout</button>
