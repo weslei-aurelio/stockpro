@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/brands/create',    [BrandController::class, 'create'])->name('brands.create');
     Route::post('/brands/create',   [BrandController::class, 'store'])->name('brands.store');
     Route::get('/brands',           [BrandController::class, 'index'])->name('brands.index');
+
+    Route::get('categories',            [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('categories/create',     [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('categories/create',    [CategoryController::class, 'store'])->name('categories.store');
     
 });
 
