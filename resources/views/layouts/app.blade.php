@@ -9,15 +9,17 @@
         <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         @vite('resources/scss/styles.scss')
+        @stack('index-css')
+        @stack('header-css')
+        @stack('create-css')
         <title>@yield('title')</title>
     </head>
     <body>
 
         @include('layouts.components.header')
         @yield('content')
-        {{-- @include('layouts.components.footer') --}}
-        @stack('index-css')
-        @stack('header-css')
+        <!-- @include('layouts.components.footer') -->
+        
 
         <!-- Realizando import do Bootstrap -->
         @vite('resources/js/main.js')

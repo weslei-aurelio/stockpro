@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
         <a class="navbar-brand">
-            <img src="/images/logo_header.png" alt="StockPro" id="logo">
+            <img src="/images/logo-header.png" alt="StockPro" id="logo">
         </a>
          <div class="d-flex align-items-center">
         <h2 class="mb-0 me-4 text-white">Distribuidora JR</h2>
