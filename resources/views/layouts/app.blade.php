@@ -14,9 +14,10 @@
 
         @include('layouts.components.header')
         @yield('content')
-        <!-- @include('layouts.components.footer') -->
+        @include('layouts.components.footer')
         @stack('index-css')
         @stack('header-css')
+        @stack('footer-css')
         @stack('create-css')
         @stack('edit_user-css')
 
