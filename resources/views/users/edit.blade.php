@@ -1,12 +1,23 @@
 @extends('layouts.app')
 
+@push('index-css')
+@vite('resources/scss/edit_user.scss')
+@endpush
+
+
 @section('content')
-    <div class="container">
-        <h1>Editar usuário</h1>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>
+                <strong>
+                    Editar Usuário
+                </strong>
+            </h1>
+        </div>
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <div class="mb-3">
+            <div class="mb-3 col-md-4">
                 <label class="form-label">Nome completo</label>
                 <input
                     type="text"
@@ -20,7 +31,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-md-4">
                 <label class="form-label">Endereço de E-mail</label>
                 <input
                     type="email"
@@ -34,7 +45,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            <div class="mb-3 col-md-4">
                 <label class="form-label">Senha</label>
                 <input
                     type="password"
@@ -47,7 +58,7 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Editar</button>
+            <button type="submit" class="btn btn-primary text-white custom-button">Editar</button>
         </form>
     </div>
 @endsection

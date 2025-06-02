@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/scss/index.scss',
                 'resources/scss/header.scss',
                 'resources/scss/create.scss',
+                'resources/scss/edit_user.scss',
                 'resources/js/main.js'
             ],
             refresh: true,
