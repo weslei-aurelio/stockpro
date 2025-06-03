@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="/dashboard">
             <img src="/images/logo-header.png" alt="StockPro" id="logo">
         </a>
          <div class="d-flex align-items-center">

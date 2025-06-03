@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
-        @vite('resources/scss/styles.scss')
+        @vite(['resources/scss/styles.scss', 'resources/js/main.js'])
         <title>@yield('title')</title>
     </head>
     <body>
