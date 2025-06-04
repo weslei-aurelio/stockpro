@@ -47,7 +47,7 @@
                 <th scope="row">{{ $user->id }}</th>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <th scope="col">{{ $user->status?->name ?? 'Sem status' }}</th>
+                <th scope="col">{{ $user->status->name }}</th>
                 <td>
                     <div class="btn-group dropup">
                         <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -62,7 +62,7 @@
                                 <form action="{{ url('users/' . $user->id . '/inactivate') }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="dropdown-item">Inativar</button>
+                                    <button type="submit" class="dropdown-item text-danger">Inativar</button>
                                 </form>
                                 @else
                                 <form action="{{ url('users/' . $user->id . '/activate') }}" method="POST" class="d-inline">
