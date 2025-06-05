@@ -16,6 +16,7 @@
         @yield('content')
         <!-- @include('layouts.components.footer') -->
         @stack('index-css')
+        @stack('products-css')
         @stack('header-css')
         @stack('create-css')
         @stack('edit_user-css')
