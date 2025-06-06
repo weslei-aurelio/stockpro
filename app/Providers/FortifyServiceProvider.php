@@ -15,6 +15,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use \App\Models\User;
 use \App\Models\Status;
+use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -39,11 +40,15 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
             
-            if ($user->status_id == Status::SUSPENSO) {
+            if ($user->status_id == Status::ATIVO) {
+                if ($user && Hash::check($request->password, $user->password)) {
+                    return $user;
+                }
+
                 return null;
             }
 
-            return $user;
+            return null;
         });
 
 
