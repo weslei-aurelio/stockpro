@@ -116,6 +116,9 @@
                     <button type="submit" class="btn btn-primary text-white custom-button-create">Salvar</button>
                 </div>
             </div>
+        </div>
+    </div> 
+</div>       
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -133,7 +136,7 @@
         }
 
         // Atualiza margem (de lucro) com base no valor de venda
-        saleInput.addEventListener('input', function () {
+        saleInput.addEventListener('blur', function () {
             const cost = parseValue(costInput.value);
             const sale = parseValue(saleInput.value);
 
@@ -145,7 +148,7 @@
         });
 
         // Atualiza valor de venda com base na margem (de lucro)
-        marginInput.addEventListener('input', function () {
+        marginInput.addEventListener('blur', function () {
             const cost = parseValue(costInput.value);
             const margin = parseValue(marginInput.value);
 
