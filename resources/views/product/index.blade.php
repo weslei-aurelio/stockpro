@@ -12,7 +12,7 @@
                 <h1>
                     <strong>Produtos</strong>
                 </h1>
-                <button type="button" class="btn btn-primary text-white mb-4 custom-button">
+                <button type="button" class="btn btn-primary text-white mb-4 custom-button" data-bs-toggle="modal" data-bs-target="#NewProduct">
                     + Novo Produto
                 </button>
             </div>
@@ -28,8 +28,40 @@
                 </form>
             </div>
         </nav>
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Estoque</th>
+                </tr>
+            </thead>
+            <tbody>
+<!-- {{--                Seção para desenvolvimento Back-End (Responsabilidade: Weslei)--}} -->
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 {{--            <div class="col-md-6">--}}
 {{--                <a href="{{ route('products.create') }}" class="btn btn-primary text-white">+ Novo Produto</a>--}}
 {{--            </div>--}}
     </div>
+
+    @include('product.create')
 @endsection
