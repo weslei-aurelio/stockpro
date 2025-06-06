@@ -9,7 +9,10 @@ class ProductController extends Controller
 {
     public function index ()
     {
-        return view('product.index');
+        $brands = Brand::all();
+        $categories = Category::all();
+        
+        return view('product.index', compact('brands', 'categories'));
     }
 
     public function create () 
