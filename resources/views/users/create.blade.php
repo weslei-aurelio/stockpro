@@ -12,7 +12,6 @@
             <div class="modal-body">
                 <form action="{{ route('users.store') }}" method="POST">
                     @csrf
-
                     <div class="form-floating mb-3">
                         <input
                             type="text"

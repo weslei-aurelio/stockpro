@@ -10,7 +10,7 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('products.create') }}" method="POST">
+                <form action="{{ route('products.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="brands">
@@ -110,11 +110,11 @@
                             placeholder="Ex: 200"
                         >
                     </div>
+                    <div class="modal-footer">
+                        <a href="/products" class="text-decoration-none text-dark">Cancelar</a>
+                        <button type="submit" class="btn btn-primary text-white custom-button-create">Salvar</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <a href="/products" class="text-decoration-none text-dark">Cancelar</a>
-                    <button type="submit" class="btn btn-primary text-white custom-button-create">Salvar</button>
-                </div>
             </div>
         </div>
     </div> 
