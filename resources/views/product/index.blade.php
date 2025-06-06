@@ -38,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-{{--                Seção para desenvolvimento Back-End (Responsabilidade: Weslei)--}}
+<!-- {{--                Seção para desenvolvimento Back-End (Responsabilidade: Weslei)--}} -->
             </tbody>
         </table>
         <nav aria-label="Page navigation example" class="d-flex justify-content-center">

@@ -14,7 +14,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="brands">
-                            Descrição do produto
+                            Descrição
                         </label>
                         <input
                             type="text"
@@ -25,39 +25,46 @@
                         >
                     </div>
                     <div class="mb-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="brand">
-                                    Marca do produto
-                                </label>
-                                <select name="brand" id="brand">
-                                    <option value="" selected="">Marca</option>
-{{--                                    @foreach ($brands as $brand)--}}
-{{--                                        <option value="{{ $brand->id }}"> {{$brand->name}} </option>--}}
-{{--                                    @endforeach--}}
+                        <label for="brand" class="form-label">Marca</label>
+                        <div class="d-flex align-items-center gap-2">
+                                <select class="form-select" name="brand" id="brand">
+                                <option selected>Selecione</option>
+                                <option value="1">Marca 1</option>
+                                <option value="2">Marca 2</option>
+                                <option value="3">Marca 3</option>
                                 </select>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('brands.create') }}">Cadastrar marca</a>
-                            </div>
+                                <!-- {{--@foreach ($brands as $brand)--}}
+{{--                                        <option value="{{ $brand->id }}"> {{$brand->name}} </option>--}}
+{{--                                @endforeach--}} -->
+
+                            <!-- Ícone SVG alinhado com o select -->
+                            <a href="{{ route('brands.create') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <div class="row">
-                            <div class="col-md-6 text-start">
-                                <label for="categories">
-                                    Tipo de produto
-                                </label>
-                                <select name="category" id="category">
-                                    <option value="" selected="">Produto</option>
-{{--                                    @foreach ($categories as $category)--}}
+                        <label for="categories" class="form-label">Tipo</label>
+                        <div class="d-flex align-items-center gap-2">
+                            <select class="form-select" name="category" id="category">
+                                <option selected>Selecione</option>
+                                <option value="1">Produto 1</option>
+                                <option value="2">Produto 2</option>
+                                <option value="3">Produto 3</option>
+                                </select>
+                             <!-- {{--                                    @foreach ($categories as $category)--}}
 {{--                                        <option value="{{ $category->id }}"> {{$category->name}} </option>--}}
 {{--                                    @endforeach--}}
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('brands.create') }}">Cadastrar tipo</a>
-                            </div>
+                                </select> -->
+                                <a href="{{ route('brands.create') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                </svg>
+                                </a>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -88,7 +95,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="profitMargin">
-                            % de margem desejada (unidade)
+                            Lucro Desejado (%)
                         </label>
                         <input
                             id="profitMargin"
@@ -101,7 +108,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="numberUnits">
-                            Quantidade de unidades
+                            Quantidade
                         </label>
                         <input
                             type="number"
@@ -122,7 +129,7 @@
 
 
 
-{{--<div class="container">--}}
+<!-- {{--<div class="container">--}}
 {{--        <h1>Cadastro de produto</h1>--}}
 {{--        <form action="{{ route('products.create') }}" method="POST">--}}
 {{--            @csrf--}}
@@ -227,7 +234,7 @@
 {{--            </div>--}}
 {{--            <button class="btn btn-primary text-white">Cadastrar produto</button>--}}
 {{--        </form>--}}
-{{--    </div>--}}
+{{--    </div>--}} -->
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
