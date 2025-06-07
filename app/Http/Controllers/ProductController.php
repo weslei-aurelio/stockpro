@@ -48,4 +48,16 @@ class ProductController extends Controller
             ->route('products.index')
             ->with('status', 'Produto cadastro com sucesso!');
     }
+
+    public function search(Request $request) 
+    {
+        $query = $request->input('searchTerm');
+
+        $products = Product::where('description', 'LIKE', "%{$query}%")
+                       ->orWhere('id', $query)
+                       ->limit(10)
+                       ->get(['id', 'description']);
+
+        return response()->json($products);
+    }
 }

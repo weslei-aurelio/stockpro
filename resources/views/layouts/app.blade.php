@@ -22,6 +22,10 @@
         @stack('create-css')
         @stack('edit_user-css')
 
+        <!-- Scripts JS no final -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        @yield('scripts')
+        
         <!-- Realizando import do Bootstrap -->
         @vite('resources/js/main.js')
     </body>
