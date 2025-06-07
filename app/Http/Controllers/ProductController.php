@@ -13,8 +13,9 @@ class ProductController extends Controller
     {
         $brands = Brand::all();
         $categories = Category::all();
+        $products = Product::all();
         
-        return view('product.index', compact('brands', 'categories'));
+        return view('product.index', compact('brands', 'categories', 'products'));
     }
 
     public function create () 
@@ -27,19 +28,24 @@ class ProductController extends Controller
 
     public function store (Request $request)
     {
-        dd($request);
-
-        $input = $request->validate([
+        $data = $request->validate([
             'description'   => 'required|string',
-            'brand_id'      => ['required', 'exists:brands, id'],
-            'category_id'   => ['required', 'exists:categories, id'],
+            'brand_id'      => ['required', 'exists:brands,id'],
+            'category_id'   => ['required', 'exists:categories,id'],
             'purchaseValue' => 'required|string',
             'salePrice'     => 'required|string',
             'profitMargin'  => 'required|string',
             'numberUnits'   => 'required|integer'
         ]);
 
-        
-        Product::save($input);
+        $data['purchaseValue']  = formatToDecimal($data['purchaseValue']);
+        $data['salePrice']      = formatToDecimal($data['salePrice']);
+        $data['profitMargin']   = formatToDecimal($data['profitMargin']);
+
+        Product::create($data);
+
+        return redirect()
+            ->route('products.index')
+            ->with('status', 'Produto cadastro com sucesso!');
     }
 }

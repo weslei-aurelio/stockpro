@@ -8,6 +8,11 @@
 
 @section('content')
 <div class="container mt-5">
+        @session('status')
+            <div class="alert alert-success text-center" role="alert">
+                {{ $value }}
+            </div>
+        @endsession
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1>
                 <strong>Produtos</strong>
@@ -38,7 +43,14 @@
             </tr>
         </thead>
         <tbody>
-        <!-- {{-- Seção para desenvolvimento Back-End (Responsabilidade: Weslei)--}} -->
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{ $product->description }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>{{ $product->salePrice}}</td>
+                    <td>{{ $product->numberUnits }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
