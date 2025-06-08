@@ -53,6 +53,12 @@
 @section('scripts')
     <script>
 
+        // mascára valor monetário
+        let money_mask = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+
         // Evento para realizar a busca do produto no banco de dados
         $('#search-product').on('input', function() {
             let query = $(this).val();
@@ -67,7 +73,8 @@
                             $('#suggestions').append(
                                 `<a href="#" class="list-group-item list-group-item-action" 
                                     data-id="${product.id}" 
-                                    data-description="${product.description}">
+                                    data-description="${product.description}"
+                                    data-sale-price="${product.salePrice}">
                                     ${product.description}
                                 </a>`
                             );
@@ -84,12 +91,15 @@
             e.preventDefault();
             
             // Pega os dados do item clicado
-            let productId = $(this).data('id');
-            let productDescription = $(this).data('description');
+            let productId           = $(this).data('id');
+            let productDescription  = $(this).data('description');
+            let salePrice           = parseFloat($(this).data('salePrice'));
+            console.log(salePrice);
             
             // Preenche o input de produto selecionado
             $('#selectedProduct').val(productDescription);
             $('#selectedProductId').val(productId);
+            $('#selectedProduct').data('salePrice', salePrice);
             
             // Limpa as sugestões
             $('#suggestions').empty();
@@ -102,44 +112,65 @@
             let id = $('#selectedProductId').val();
             let description = $('#selectedProduct').val();
             let quantity = parseInt($('#quantity').val());
+            let salePrice = parseFloat($('#selectedProduct').data('salePrice'));
 
             if (!id || !description || quantity <= 0) {
                 alert("Preencha corretamente o produto e a quantidade.");
                 return;
             }
 
-            // Exemplo fixo de preço (vamos depois puxar isso do banco, mas agora é só para teste)
-            let precoUnitario = 5.00; // valor fictício temporário
-            let totalItem = precoUnitario * quantity;
+            let totalItem = salePrice * quantity;
 
             // Adiciona na lista de venda
             vendaItens.push({
                 id: id,
                 description: description,
                 quantity: quantity,
-                precoUnitario: precoUnitario,
+                salePrice: salePrice,
                 totalItem: totalItem
             });
 
             // Adiciona na tabela visual
             $('#tabelaProdutos tbody').append(`
-                <tr>
+                <tr data-id="${id}">
                     <td>${description}</td>
                     <td>${quantity}</td>
-                    <td>R$ ${precoUnitario.toFixed(2)}</td>
-                    <td>R$ ${totalItem.toFixed(2)}</td>
+                    <td>${money_mask.format(salePrice)}</td>
+                    <td>${money_mask.format(totalItem)}</td>
+                    <td><button class="btn btn-danger btn-sm btn-remover">Remover</button></td>
                 </tr>
             `);
 
             // Atualiza o total geral
             totalGeral += totalItem;
-            $('#totalGeral').text("R$ " + totalGeral.toFixed(2));
+            $('#totalGeral').text(money_mask.format(totalGeral));
 
             // Limpa os campos para nova entrada
             $('#selectedProductId').val('');
             $('#selectedProduct').val('');
             $('#quantity').val(1);
         });
+
+        $('#tabelaProdutos').on('click', '.btn-remover', function() {
+            let linha = $(this).closest('tr');
+
+            // Recupera o total desse item
+            let totalItemTexto = linha.find('td').eq(3).text();
+            let totalItem = parseFloat(totalItemTexto.replace("R$", "").replace(".", "").replace(",", "."));
+
+            // Atualiza o total geral
+            totalGeral -= totalItem;
+            $('#totalGeral').text(money_mask.format(totalGeral));
+
+            // Remove a linha visualmente
+            linha.remove();
+
+            let idItem = linha.data('id');
+            vendaItens = vendaItens.filter(item => item.id != idItem);
+            console.log(vendaItens);
+
+        });
+
 
     </script>
 @endsection

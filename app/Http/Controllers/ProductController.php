@@ -56,7 +56,7 @@ class ProductController extends Controller
         $products = Product::where('description', 'LIKE', "%{$query}%")
                        ->orWhere('id', $query)
                        ->limit(10)
-                       ->get(['id', 'description']);
+                       ->get(['id', 'description', 'salePrice']);
 
         return response()->json($products);
     }
