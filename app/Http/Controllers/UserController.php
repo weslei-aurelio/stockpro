@@ -55,9 +55,13 @@ class UserController extends Controller
 
         User::create($input);
 
-        return redirect()
-            ->route('users.index')
-            ->with('status', 'Usuário cadastrado com sucesso!');
+        request()->session()->flash('success', 'Usuário cadastrado com sucesso');
+
+        return redirect()->route('users.index');
+
+        // return redirect()
+        //     ->route('users.index')
+        //     ->with('status', 'Usuário cadastrado com sucesso!');
     }
 
     public function inactivate(User $user) 
@@ -66,9 +70,13 @@ class UserController extends Controller
         $user->status_id = Status::SUSPENSO;
 
         $user->save();
-        return redirect()
-            ->route('users.index')
-            ->with('status', 'Usuário inativado com sucesso!');
+
+        request()->session()->flash('success', 'Usuário inativado com sucesso');
+
+        return redirect()->route('users.index');
+        // return redirect()
+        //     ->route('users.index')
+        //     ->with('status', 'Usuário inativado com sucesso!');
 
     }
 
@@ -78,9 +86,13 @@ class UserController extends Controller
         $user->status_id = Status::ATIVO;
 
         $user->save();
-        return redirect()
-            ->route('users.index')
-            ->with('status', 'Usuário ativado com sucesso!');
+
+        request()->session()->flash('success', 'Usuário ativado com sucesso');
+
+        return redirect()->route('users.index');
+        // return redirect()
+        //     ->route('users.index')
+        //     ->with('status', 'Usuário ativado com sucesso!');
     }
 
 }
