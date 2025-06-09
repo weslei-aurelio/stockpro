@@ -22,8 +22,6 @@
             setTimeout(() => toast.remove(), 500);
         }
     }
-
-    // Fechar automaticamente após 5s
     setTimeout(() => {
         const toast = document.getElementById('success-toast');
         if (toast) {
