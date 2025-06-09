@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PdvController;
+use App\Http\Controllers\SupplierController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
@@ -36,12 +38,14 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/products',         [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create',  [ProductController::class, 'create'])->name('products.create');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
-    
     // requisição assincrona para buscar produto de acordo com o input do usuário no pdv
     Route::get('/search-products',  [ProductController::class, 'search']);
     
     Route::get('/pdv', [PdvController::class, 'index'])->name('pdv.index');
     // Rota definida para persistir a venda no banco de dados
     Route::post('/sales', [PdvController::class, 'storeSale'])->name('pdv.storeSale');
-    
+
+    Route::get('/suppliers',          [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::get('/suppliers/create',   [SupplierController::class, 'crate'])->name('suppliers.create');
+    Route::post('/suppliers/create',  [SupplierController::class, 'store'])->name('suppliers.store');
 });

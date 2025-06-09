@@ -11,13 +11,11 @@ class UserController extends Controller
     public function index ()
     {
         $users = User::all();
-
         return view('users.index', compact('users'));
     }
 
     public function edit(User $user)
     {
-
         return view('users.edit', compact('user'));
     }
 
@@ -56,12 +54,7 @@ class UserController extends Controller
         User::create($input);
 
         request()->session()->flash('success', 'Usuário cadastrado com sucesso');
-
         return redirect()->route('users.index');
-
-        // return redirect()
-        //     ->route('users.index')
-        //     ->with('status', 'Usuário cadastrado com sucesso!');
     }
 
     public function inactivate(User $user) 
@@ -72,12 +65,7 @@ class UserController extends Controller
         $user->save();
 
         request()->session()->flash('success', 'Usuário inativado com sucesso');
-
         return redirect()->route('users.index');
-        // return redirect()
-        //     ->route('users.index')
-        //     ->with('status', 'Usuário inativado com sucesso!');
-
     }
 
     public function activate(User $user) 
@@ -88,11 +76,7 @@ class UserController extends Controller
         $user->save();
 
         request()->session()->flash('success', 'Usuário ativado com sucesso');
-
         return redirect()->route('users.index');
-        // return redirect()
-        //     ->route('users.index')
-        //     ->with('status', 'Usuário ativado com sucesso!');
     }
 
 }
