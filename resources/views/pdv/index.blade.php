@@ -43,16 +43,15 @@
         </tr>
         </tfoot>
     </table>
-    <!-- Finalizar Venda -->
     <div class="text-end">
-        <button class="btn btn-success">Finalizar Venda</button>
+        <button class="btn btn-success" id="btnFinalizar">Finalizar Venda</button>
     </div>
 </div>
 @endsection
 
 @section('scripts')
     <script>
-
+        
         // mascára valor monetário
         let money_mask = new Intl.NumberFormat('pt-BR', {
             style: 'currency',
@@ -151,6 +150,7 @@
             $('#quantity').val(1);
         });
 
+        // Remove itens da lista e atualiza o total da venda
         $('#tabelaProdutos').on('click', '.btn-remover', function() {
             let linha = $(this).closest('tr');
 
@@ -171,6 +171,33 @@
 
         });
 
+        $('#btnFinalizar').on('click', function() {
+
+            console.log(JSON.stringify({
+                items: vendaItens,
+                total: totalGeral
+            }));
+
+            $.ajax({
+                url: '/sales',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    items: vendaItens,
+                    total: totalGeral
+                }),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(resposta) {
+                    alert('Venda salva com sucesso!');
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+
+        });
 
     </script>
 @endsection

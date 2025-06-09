@@ -11,7 +11,8 @@
         <title>@yield('title')</title>
     </head>
     <body>
-
+        <!-- Inserção CSRF Token para requisições http utilizando AJAX formulário pdv -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.components.header')
         @yield('content')
         @include('layouts.components.footer')
@@ -21,11 +22,9 @@
         @stack('footer-css')
         @stack('create-css')
         @stack('edit_user-css')
-
         <!-- Scripts JS no final -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         @yield('scripts')
-        
         <!-- Realizando import do Bootstrap -->
         @vite('resources/js/main.js')
     </body>
