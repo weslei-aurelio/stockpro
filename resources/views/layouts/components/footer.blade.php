@@ -10,8 +10,8 @@
                     &copy; 2025 StockPro. Todos os direitos reservados
                 </div>
             <div class="col footer-col">
-                <a href="#" class="text-primary">
-                    Base de Conhecimento
+                <a href="{{ asset('manuals/manual-do-usuario.pdf') }}" class="text-primary" download>
+                    Manual do Usuário
                 </a>
             </div>
                 <div class="col footer-col">

@@ -97,5 +97,7 @@
     </nav>
 </div>
 @include('users.create')
+@include('layouts.components.alert')
+
 @endsection
 
