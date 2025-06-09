@@ -38,5 +38,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>    
+    </div>
+    @include('layouts.components.alert')    
 @endsection

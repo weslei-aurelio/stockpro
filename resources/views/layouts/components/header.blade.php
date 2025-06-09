@@ -41,8 +41,8 @@
     </div>
     <div class="offcanvas-body">
         <a href="/" class="d-block mb-2 text-success">Home</a>
-        <a href="{{ route('users.index')}}" class="d-block mb-2 text-success">Usuários</a>
-        <a href="{{ route('products.index')}}" class="d-block mb-2 text-success">Produtos</a>
         <a href="{{ route('pdv.index')}}" class="d-block mb-2 text-success">PDV</a>
+        <a href="{{ route('products.index')}}" class="d-block mb-2 text-success">Produtos</a>
+        <a href="{{ route('users.index')}}" class="d-block mb-2 text-success">Usuários</a>
     </div>
 </div>

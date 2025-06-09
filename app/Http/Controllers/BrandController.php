@@ -27,9 +27,13 @@ class BrandController extends Controller
 
         Brand::create($input);
 
-        return redirect()
-            ->route('brands.index')
-            ->with('status', 'Marca cadastrada com sucesso!');
+        request()->session()->flash('success', 'Marca Cadastrada com Sucesso');
+
+        return redirect()->route('brands.index');
+
+        // return redirect()
+        //     ->route('brands.index')
+        //     ->with('status', 'Marca cadastrada com sucesso!');
 
     }
 

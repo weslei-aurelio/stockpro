@@ -3,15 +3,15 @@
 @section('content')
     <div class="container py-4">
     <!-- Pesquisa -->
-    <div class="mb-3">
-        <label for="search" class="form-label">🔍 Pesquisa Produto</label>
-        <input type="text" class="form-control" id="search-product" placeholder="Digite o produto...">
+    <div class="container col-md-6 mb-3">
+        <label for="search" class="form-label"></label>
+        <input type="text" class="form-control" id="search-product" placeholder="Selecione o Produto...">
         <div id="suggestions" class="list-group"></div>
     </div>
     <!-- Produto Selecionado -->
     <div class="row align-items-end mb-3">
         <div class="col-md-6">
-            <label for="selectedProduct" class="form-label">Produto Selecionado</label>
+            <label for="selectedProduct" class="form-label"></label>
             <input type="text" class="form-control" id="selectedProduct" placeholder="Ex: Cerveja Brahma">
             <input type="hidden" id="selectedProductId">
         </div>
@@ -20,7 +20,7 @@
             <input type="number" class="form-control" id="quantity" min="1" value="1">
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary w-100" id="adicionarItemLista">Adicionar</button>
+            <button class="btn btn-primary w-100 text-white" id="adicionarItemLista">Adicionar</button>
         </div>
     </div>
     <!-- Lista de Produtos -->
