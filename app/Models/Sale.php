@@ -12,4 +12,9 @@ class Sale extends Model
         'sale_date',
         'sale_value',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(SaleItem::class);
+    }
 }

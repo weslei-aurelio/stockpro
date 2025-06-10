@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PdvController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
+
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +47,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pdv', [PdvController::class, 'index'])->name('pdv.index');
     // Rota definida para persistir a venda no banco de dados
     Route::post('/sales', [PdvController::class, 'storeSale'])->name('pdv.storeSale');
+    Route::get('/movement-report', [SaleController::class, 'movementReport'])->name('movementReport.index');
 
     Route::get('/suppliers',          [SupplierController::class, 'index'])->name('suppliers.index');
     Route::get('/suppliers/create',   [SupplierController::class, 'crate'])->name('suppliers.create');

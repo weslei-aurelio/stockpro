@@ -13,4 +13,14 @@ class SaleItem extends Model
         'item_total',
         'unit_value'
     ];
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

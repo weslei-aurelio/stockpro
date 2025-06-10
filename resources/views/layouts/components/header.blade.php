@@ -8,7 +8,7 @@
             <img src="/images/logo-header.png" alt="StockPro" id="logo">
         </a>
          <div class="d-flex align-items-center">
-        <h2 class="mb-0 me-4 text-white">Distribuidora JR</h2>
+        <h2 class="mb-0 me-4 text-white">JR Distribuidora</h2>
         <div class="btn-group">
             <button type="button" class="dropdown-toggle no-border" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -45,5 +45,7 @@
         <a href="{{ route('products.index')}}" class="d-block mb-2 text-success">Produtos</a>
         <a href="{{ route('suppliers.index')}}" class="d-block mb-2 text-success">Fornecedores</a>
         <a href="{{ route('users.index')}}" class="d-block mb-2 text-success">Usuários</a>
+        <hr>
+        <a href="{{ route('movementReport.index')}}" class="d-block mb-2 text-success">Relatório de movimentação</a>
     </div>
 </div>
