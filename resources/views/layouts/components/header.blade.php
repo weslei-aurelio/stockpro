@@ -46,6 +46,9 @@
         <a href="{{ route('suppliers.index')}}" class="d-block mb-2 text-success">Fornecedores</a>
         <a href="{{ route('users.index')}}" class="d-block mb-2 text-success">Usuários</a>
         <hr>
-        <a href="{{ route('movementReport.index')}}" class="d-block mb-2 text-success">Relatório de movimentação</a>
+        <h4>Relatórios</h4>
+        <a href="{{ route('movementReport.index') }}" class="d-block mb-2 text-success">Movimentação</a>
+        <a href="{{ route('bestSellingProducts.index') }}" class="d-block mb-2 text-success">Produtos mais vendidos</a>
+
     </div>
 </div>
