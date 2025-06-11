@@ -22,6 +22,8 @@
         @stack('footer-css')
         @stack('create-css')
         @stack('edit_user-css')
+        @stack('pdv-css')
+        
         <!-- Scripts JS no final -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         @yield('scripts')

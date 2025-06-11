@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'PDV | StockPRO')
+
+@push('index-css')
+@vite('resources/scss/pdv.scss')
+@endpush
+
 @section('content')
-    <div class="container py-4">
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container py-4 bg-pdv">
+        <h1 class="text-primary text-center">PDV</h1>
     <!-- Pesquisa -->
     <div class="container col-md-6 mb-3">
         <label for="search" class="form-label"></label>
@@ -47,6 +55,10 @@
         <button class="btn btn-success" id="btnFinalizar">Finalizar Venda</button>
     </div>
 </div>
+</div>
+
+@include('layouts.components.alert')
+
 @endsection
 
 @section('scripts')

@@ -43,5 +43,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pdv', [PdvController::class, 'index'])->name('pdv.index');
     // Rota definida para persistir a venda no banco de dados
     Route::post('/sales', [PdvController::class, 'storeSale'])->name('pdv.storeSale');
+
     
 });
