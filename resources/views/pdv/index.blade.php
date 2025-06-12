@@ -2,7 +2,7 @@
 
 @section('title', 'PDV | StockPRO')
 
-@push('index-css')
+@push('pdv-css')
 @vite('resources/scss/pdv.scss')
 @endpush
 

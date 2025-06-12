@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Marcas | StockPRO')
+
+@push('categories-css')
+@vite('resources/scss/categories.scss')
+@endpush
+
 @section('content')
     @session('status')
         <div class="alert alert-success text-center" role="alert">
@@ -38,5 +44,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>    
+    </div>
+    @include('layouts.components.alert')    
 @endsection

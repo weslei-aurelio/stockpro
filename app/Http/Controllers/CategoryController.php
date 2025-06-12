@@ -26,8 +26,12 @@ class CategoryController extends Controller
 
         Category::create($input);
 
-        return redirect()
-            ->route('categories.index')
-            ->with('status', 'Categoria cadastrada com sucesso!');
+        request()->session()->flash('success', 'Categoria Cadastrada com Sucesso');
+
+        return redirect()->route('categories.index');
+
+        // return redirect()
+        //     ->route('categories.index')
+        //     ->with('status', 'Categoria cadastrada com sucesso!');
     }
 }

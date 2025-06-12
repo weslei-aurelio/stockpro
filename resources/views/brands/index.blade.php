@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Marcas | StockPRO')
+
+@push('brands-css')
+@vite('resources/scss/brands.scss')
+@endpush
+
 @section('content')
     @session('status')
         <div class="alert alert-success text-center" role="alert">
