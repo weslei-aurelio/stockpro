@@ -11,6 +11,8 @@
         <title>@yield('title')</title>
     </head>
     <body>
+        <!-- Inserção CSRF Token para requisições http utilizando AJAX formulário pdv -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.components.header')
         @yield('content')
         @include('layouts.components.footer')
