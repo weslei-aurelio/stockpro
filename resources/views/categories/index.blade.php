@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Marcas | StockPRO')
+@section('title', 'Categorias | StockPRO')
 
 @push('categories-css')
 @vite('resources/scss/categories.scss')
