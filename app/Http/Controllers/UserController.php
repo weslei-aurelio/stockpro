@@ -58,9 +58,7 @@ class UserController extends Controller
 
     public function inactivate(User $user) 
     {
-        $user = User::where('id', $user->id)->first();
         $user->status_id = Status::SUSPENSO;
-
         $user->save();
 
         request()->session()->flash('success', 'Usuário inativado com sucesso');
@@ -69,9 +67,7 @@ class UserController extends Controller
 
     public function activate(User $user) 
     {
-        $user = User::where('id', $user->id)->first();
         $user->status_id = Status::ATIVO;
-
         $user->save();
 
         request()->session()->flash('success', 'Usuário ativado com sucesso');
