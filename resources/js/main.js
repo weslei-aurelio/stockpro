@@ -2,6 +2,7 @@
 import '../scss/styles.scss';
 import 'jquery-mask-plugin';
 import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap
 
 import $ from 'jquery'
 window.$ = window.jQuery = $;

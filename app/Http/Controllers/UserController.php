@@ -42,16 +42,15 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->merge(['status_id' => Status::ATIVO]);
-
-        $input = $request->validate([
+        $data = $request->validate([
             'name'      => 'required|string',
-            'email'     => 'required|email',
-            'password'  => 'required|min:6',
-            'status_id' => 'required|integer'
+            'email'     => 'required|email|unique:users,email',
+            'password'  => 'required|min:6|confirmed',
         ]);
 
-        User::create($input);
+        $data['status_id'] = Status::ATIVO;
+
+        User::create($data);
 
         request()->session()->flash('success', 'Usuário cadastrado com sucesso');
         return redirect()->route('users.index');
