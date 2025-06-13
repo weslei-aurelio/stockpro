@@ -7,6 +7,7 @@
 @endpush
 
 @section('content')
+@include('layouts.components.alert')
 <div class="container mt-5">
         @session('status')
             <div class="alert alert-success text-center" role="alert">

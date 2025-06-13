@@ -44,9 +44,13 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect()
-            ->route('products.index')
-            ->with('status', 'Produto cadastro com sucesso!');
+        request()->session()->flash('success', 'Produto Cadastrado com Sucesso');
+
+        return redirect()->route('products.index');
+
+        // return redirect()
+        //     ->route('products.index')
+        //     ->with('status', 'Produto cadastro com sucesso!');
     }
 
     public function search(Request $request) 

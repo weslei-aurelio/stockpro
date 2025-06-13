@@ -17,6 +17,9 @@ export default defineConfig({
                 'resources/scss/create.scss',
                 'resources/scss/products.scss',
                 'resources/scss/edit_user.scss',
+                'resources/scss/pdv.scss',
+                'resources/scss/brands.scss',
+                'resources/scss/categories.scss',
                 'resources/js/main.js'
             ],
             refresh: true,
