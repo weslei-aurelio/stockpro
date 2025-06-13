@@ -96,5 +96,13 @@
     </div>
     @include('layouts.components.alert')
     @include('users.partials.create')
+    @if ($errors->any())
+        <script>
+            window.onload = function() {
+                var myModal = new bootstrap.Modal(document.getElementById('NewUser'));
+                myModal.show();
+            }
+        </script>
+    @endif
 @endsection
 
