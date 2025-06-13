@@ -7,9 +7,7 @@ use App\Http\Controllers\PdvController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
-
-
-
+use App\Models\Supplier;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
@@ -49,7 +47,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/movement-report',       [SaleController::class, 'movementReport'])->name('movementReport.index');
     Route::get('/best-selling-products', [SaleController::class, 'bestSellingProducts'])->name('bestSellingProducts.index');
 
-    Route::get('/suppliers',          [SupplierController::class, 'index'])->name('suppliers.index');
-    Route::get('/suppliers/create',   [SupplierController::class, 'crate'])->name('suppliers.create');
-    Route::post('/suppliers/create',  [SupplierController::class, 'store'])->name('suppliers.store');
+    Route::get('/suppliers',           [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::get('/suppliers/create',    [SupplierController::class, 'crate'])->name('suppliers.create');
+    Route::post('/suppliers/create',   [SupplierController::class, 'store'])->name('suppliers.store');
+    Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
+    Route::put('/suppliers/{supplier}/edit', [SupplierController::class, 'update'])->name('suppliers.update');
+
 });

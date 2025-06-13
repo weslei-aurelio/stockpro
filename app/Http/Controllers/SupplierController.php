@@ -33,4 +33,26 @@ class SupplierController extends Controller
         return redirect()
             ->route('suppliers.index');
     }
+
+    public function edit(Supplier $supplier)
+    {
+        return view ('suppliers.edit', compact('supplier'));
+    }
+
+    public function update(Supplier $supplier, Request $request) 
+    {
+        $data = $request->validate([
+            'name'        => 'string|required',
+            'email'       => 'email|required',
+            'phone'       => 'string|required',
+            'observation' => 'string',
+        ]);
+
+        $supplier->fill($data);
+        $supplier->save();
+
+        return redirect()
+            ->route('suppliers.index')
+            ->with('status', 'Fornecedor atualizado com sucesso!');
+    }
 }

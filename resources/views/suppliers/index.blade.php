@@ -31,8 +31,8 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
-                            {{-- <li><a href="#" class="dropdown-item">Editar</a></li>
-                            <li>
+                            <li><a href="{{ route('suppliers.edit', $supplier->id) }}" class="dropdown-item">Editar</a></li>
+                            {{-- <li>
                                 @if ($supplier)
                                 <form action="{{ url('users/' . $user->id . '/inactivate') }}" method="POST" class="d-inline">
                                     @csrf

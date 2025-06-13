@@ -12,4 +12,9 @@ class Supplier extends Model
         'phone',
         'observation'
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
