@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -14,43 +15,55 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function edit(User $user)
-    {
-        return view('users.edit', compact('user'));
-    }
-
     public function update (User $user, Request $request)
     {
-        $input = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'      => 'required',
             'email'     => 'required|email',
             'password'  => 'exclude_if:password,null|min:6'
         ]);
+      
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'edit')
+                ->withInput();
+        }
 
-        $user->fill($input);
+        $user->name  = $request->name;
+        $user->email = $request->email;
+        
+        if ($request->filled('password')) {
+            $user->password = $request->password;
+        }
+
         $user->save();
-
+                
         return redirect()
             ->route('users.index')
             ->with('status', 'Usuário editado com sucesso!');
     }
 
-    public function create() 
-    {
-        return view('users.create');
-    }
-
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $user = new User();
+
+        $validator = Validator::make($request->all(), [
             'name'      => 'required|string',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required|min:6|confirmed',
         ]);
 
-        $data['status_id'] = Status::ATIVO;
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'create')
+                ->withInput();
+        }
 
-        User::create($data);
+        $user->name      = $request->name;
+        $user->email     = $request->email;
+        $user->password  = $request->password;
+        $user->status_id = Status::ATIVO;
+        $user->save();
 
         request()->session()->flash('success', 'Usuário cadastrado com sucesso');
         return redirect()->route('users.index');

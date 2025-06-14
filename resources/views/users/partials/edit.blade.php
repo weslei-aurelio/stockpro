@@ -1,10 +1,10 @@
-<div class="modal fade" id="NewUser" tabindex="-1" role="dialog" aria-labellebdy="NewUser" aria-hidden="true">
+<div class="modal fade" id="EditUser" tabindex="-1" role="dialog" aria-labellebdy="EditUser" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-fullscreen-xl-down" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">
                     <strong>
-                        Novo Usuário
+                        Editar usuário
                     </strong>
                 </h2>
                 <button 
@@ -16,76 +16,64 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('users.store') }}" method="POST">
+                <form action="{{ route('users.update', ['user' => '__ID__'])  }}" method="POST" id="editUserForm">
                     @csrf
+                    @method('PUT')
                     <div class="form-floating mb-3">
                         <input
                             type="text"
                             name="name"
-                            class="form-control @error('name', 'create') is-invalid @enderror"
-                            value="{{ old('name') }}"
-                            placeholder="Nome Completo"
+                            class="form-control @error('name', 'edit') is-invalid @enderror"
+                            id="editName"
+                            value="{{ old('name')}} "
                         >
-                        <label class="floatingInput">Nome completo</label>
-                        @error('name', 'create')
+                        @error('name', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div class="form-floating mb-3">
-                        <input
+                    <input
                             type="email"
                             name="email"
-                            class="form-control @error('email', 'create') is-invalid @enderror"
+                            class="form-control @error('email', 'edit') is-invalid @enderror"
+                            id="editEmail"
                             value="{{ old('email') }}"
-                            placeholder="Endereço de E-mail"
                         >
-                        <label class="floatingInput">Endereço de E-mail</label>
-                        @error('email', 'create')
+                        @error('email', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <div class="form-floating mb-3 position-relative">
-                        <input 
-                            type="password" 
-                            name="password" 
-                            class="form-control @error('password', 'create') is-invalid @enderror" 
-                            id="passwordField" 
-                            placeholder="Senha"
+                    <div class="form-floating mb-3">
+                        <label class="floatingInput">Senha</label>
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control @error('password', 'edit') is-invalid @enderror"
                         >
-                        <label for="passwordField">
-                            Senha
-                        </label>
-                        {{-- Validar, pois não está funcionando! --}}
-                        <span 
-                            class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" 
-                            onclick="togglePassword('passwordField', this)"
-                        >
-                            <i class="fa-solid fa-eye"></i>
-                        </span>
-                        @error('password', 'create')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                        @error('password', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
-                    <div class="form-floating mb-3 position-relative">
-                        <input 
+                    <div class="form-floating mb-3">
+                        <label class="floatingInput">Confirmar Senha</label>
+                        <input
                             type="password" 
                             name="password_confirmation" 
                             class="form-control" 
                             id="confirmPasswordField" 
-                            placeholder="Confirmar Senha"
+                            class="form-control @error('password', 'edit') is-invalid @enderror"
                         >
-                        <label for="confirmPasswordField">Confirmar Senha</label>
-                        {{-- Validar, pois não está funcionando! --}}
-                        <span 
-                            class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" 
-                            onclick="togglePassword('confirmPasswordField', this)"
-                        >
-                            <i class="fa-solid fa-eye"></i>
-                        </span>
+                        @error('password', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                         <a 
@@ -96,7 +84,7 @@
                         <button 
                             type="submit" 
                             class="btn btn-primary text-white custom-button-create">
-                            Salvar
+                            Atualizar
                         </button>
                     </div>
                 </form>
@@ -104,7 +92,7 @@
         </div>
     </div>
 </div>
-
+{{-- 
 <script>
     // funcionalidade para visualizar/esconder a senha digitada pelo usuário
     function togglePassword(fieldId, toggleElement) {
@@ -121,4 +109,4 @@
             icon.classList.add('fa-eye');
         }
     }
-</script>
+</script> --}}

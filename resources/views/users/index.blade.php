@@ -24,7 +24,13 @@
                 <form class="d-flex" role="search">
                 <input class="form-control me-2 navbar-brand" type="search" placeholder="Procurar" aria-label="Search"/>
                     <button class="btn btn-primary" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="16" 
+                            height="16" 
+                            fill="currentColor" 
+                            class="bi bi-search" 
+                            viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                         </svg>
                     </button>
@@ -61,9 +67,15 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
                                 <li>
-                                    <a href="{{ route('users.edit', $user->id )}}" class="dropdown-item">
+                                    <button type="button" 
+                                        class="dropdown-item"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#EditUser"
+                                        data-user-id="{{ $user->id }}"
+                                        data-user-name="{{ $user->name }}"
+                                        data-user-email="{{ $user->email }}">
                                         Editar
-                                    </a>
+                                    </button>
                                 </li>
                                 <li>
                                     @if ($user->status_id == 1)
@@ -86,7 +98,7 @@
             @endforeach
             </tbody>
         </table>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        {{-- <nav aria-label="Page navigation example" class="d-flex justify-content-center">
             <ul class="pagination">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -102,17 +114,52 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav> --}}
     </div>
     @include('layouts.components.alert')
     @include('users.partials.create')
-    @if ($errors->any())
+    @include('users.partials.edit')
+    @if ($errors->create->any())
         <script>
             window.onload = function() {
-                var myModal = new bootstrap.Modal(document.getElementById('NewUser'));
-                myModal.show();
+                var newUserModal = new bootstrap.Modal(document.getElementById('NewUser'));
+                newUserModal.show();
+            }
+        </script>
+    @endif
+    @if ($errors->edit->any())
+        <script>
+            window.onload = function() {
+                var editUserModal = new bootstrap.Modal(document.getElementById('EditUser'));
+                editUserModal.show();
             }
         </script>
     @endif
 @endsection
+
+@section('scripts')
+// preencher os inputs da modal editar usuário
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const modal = document.getElementById('EditUser');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function (event) {
+                const button  = event.relatedTarget;
+                const name    = button.getAttribute('data-user-name');
+                const email   = button.getAttribute('data-user-email');
+                const id      = button.getAttribute('data-user-id');
+
+                document.getElementById('editName').value  = name;
+                document.getElementById('editEmail').value = email;
+
+                const form  = document.getElementById('editUserForm');
+                form.action = `/users/${id}/edit`;
+            });
+        }
+    });
+</script>
+@endsection
+
 
