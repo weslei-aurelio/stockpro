@@ -51,6 +51,5 @@
         <h4>Relatórios</h4>
         <a href="{{ route('movementReport.index') }}" class="d-block mb-2 text-success">Movimentação</a>
         <a href="{{ route('bestSellingProducts.index') }}" class="d-block mb-2 text-success">Produtos mais vendidos</a>
-
     </div>
 </div>
