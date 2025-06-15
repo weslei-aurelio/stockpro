@@ -13,10 +13,12 @@
         </div>
     @endsession
     <div class="container mt-5 d-flex justify-content-end">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary text-white">Nova categoria</a>
+        <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewCategories">
+            Nova Categoria
+        </button>
     </div>
     <div class="container">
-        <h1 class="text-center m-5">Categorias cadastradas</h1>
+        <h1 class="text-center m-5">Categorias</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -45,5 +47,6 @@
             </tbody>
         </table>
     </div>
+    @include('categories.partials.create')
     @include('layouts.components.alert')    
 @endsection
