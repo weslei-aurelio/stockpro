@@ -7,8 +7,8 @@
     <div class="container mt-4">
         <h1>Produtos mais vendidos</h1>
         <div class="container mt-4">
-            <table class="table table-bordered table-striped">
-            <thead>
+            <table class="table table-bordered table-striped table-hover">
+            <thead class="table-primary">
                 <tr>
                     <th scope="col">Código do produto</th>
                     <th scope="col">Produto</th>

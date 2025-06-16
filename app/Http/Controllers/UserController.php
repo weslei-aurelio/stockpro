@@ -37,10 +37,9 @@ class UserController extends Controller
         }
 
         $user->save();
-                
-        return redirect()
-            ->route('users.index')
-            ->with('status', 'Usuário editado com sucesso!');
+
+        request()->session()->flash('success', 'Usuário editado com sucesso');
+        return redirect()->route('users.index');
     }
 
     public function store(Request $request)

@@ -34,8 +34,8 @@
             </form>
         </div>
     </nav>
-    <table class="table custom-table">
-        <thead>
+    <table class="table table-hover table-striped">
+        <thead class="table-primary">
             <tr>
                 <th scope="col">Descrição</th>
                 <th scope="col">Categoria</th>

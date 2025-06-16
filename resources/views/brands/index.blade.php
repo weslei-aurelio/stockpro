@@ -17,7 +17,9 @@
         <h1>
             <strong>Marcas</strong>
         </h1>
-        <a href="{{ route('brands.create') }}" class="btn btn-primary text-white">Nova marca</a>
+        <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewBrand">
+            Nova Marca
+        </button>
     </div>
     <nav class="navbar">
         <div class="container-fluid">
@@ -31,8 +33,8 @@
             </form>
         </div>
     </nav>
-    <table class="table custom-table">
-        <thead>
+    <table class="table table-hover table-striped">
+        <thead class=table-primary>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Marca</th>
@@ -45,13 +47,22 @@
                     <th scope="row">{{ $brand->id }}</th>
                     <td>{{ $brand->name }}</td>
                     <td>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-primary text-white btn-sm" href="#">Editar</a>
-                            <form action="#" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Inativar</button>
-                            </form>
+                        <div class="btn-group">
+                            <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical text-dark" viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
+                                <li><a class="dropdown-item" href="#">Editar</a></li>
+                                <li>
+                                    <form action="#" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                 </tr>
@@ -76,43 +87,6 @@
         </ul>
     </nav>
 </div>
-    <!-- @session('status')
-        <div class="alert alert-success text-center" role="alert">
-            {{ $value }}
-        </div>
-    @endsession
-    <div class="container mt-5 d-flex justify-content-end">
-        <a href="{{ route('brands.create') }}" class="btn btn-primary text-white">Nova marca</a>
-    </div>
-    <div class="container">
-        <h1 class="text-center m-5">Lista de marcas</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($brands as $brand)
-                    <tr>
-                        <th scope="row">{{ $brand->id }}</th>
-                        <td>{{ $brand->name }}</td>
-                        <td>
-                            <div class="d-flex gap-2">
-                                <a class="btn btn-primary text-white btn-sm" href="#">Editar</a>
-                                <form action="#" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Inativar</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> -->
+    @include('brands.partials.create')
     @include('layouts.components.alert')    
 @endsection

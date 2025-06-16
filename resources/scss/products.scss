@@ -5,47 +5,9 @@
     max-width: 70%;
 }
 
-.custom-button {
-    padding: 0.7rem 0.7rem;
-    border-radius: 0.5rem;
-    font-size: 1.3rem;
-}
-
-.custom-table {
-    border-radius: 1.5rem;
-    overflow: hidden;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-.custom-table th{
-    background-color: #f5f5f5;
-    padding: 1.5rem;
-    font-size: 1.6rem;
-    max-width: 100%;
-    // border-radius: 1.5rem;
-}
-
-.custom-table tr{
-    padding: 1.5rem;
-    background-color: #f5f5f5;
-    border-radius: 1.5rem;
-}
-
-h1{
-    font-size: 3.5rem;
-}
-
-.modal-body{
-    font-size: 20px;
-}
-
-.modal-footer{
-    font-size: 20px;
-}
-
-.custom-button-create {
-    padding: 0.6rem 0.6rem;
-    border-radius: 0.5rem;
-    font-size: 1.3rem;
+.table {
+  border-collapse: separate !important; /* importante para permitir bordas arredondadas */
+  border-spacing: 0; /* remove espaçamento */
+  border-radius: 0.6rem; /* define o arredondamento */
+  border: 1px solid #dee2e6; /* borda da tabela (igual do bootstrap) */
 }

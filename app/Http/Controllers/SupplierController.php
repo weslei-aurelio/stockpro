@@ -30,7 +30,7 @@ class SupplierController extends Controller
 
         Supplier::create($data);
 
-        return redirect()
-            ->route('suppliers.index');
+        request()->session()->flash('success', 'Fornecedor cadastrado com sucesso');
+        return redirect()->route('suppliers.index');
     }
 }
