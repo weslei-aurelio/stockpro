@@ -14,7 +14,7 @@
     @endsession
     <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1><strong>Usuários</strong></h1>
+        <h1><strong>Usuários Oi</strong></h1>
        <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewUser">
             + Novo usuário
         </button>
