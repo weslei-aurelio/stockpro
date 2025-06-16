@@ -25,6 +25,7 @@
         @stack('pdv-css')
         @stack('brands-css')
         @stack('categories-css')
+        @stack('suppliers-css')
         
         <!-- Scripts JS no final -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

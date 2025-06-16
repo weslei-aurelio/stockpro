@@ -20,6 +20,7 @@ export default defineConfig({
                 'resources/scss/pdv.scss',
                 'resources/scss/brands.scss',
                 'resources/scss/categories.scss',
+                'resources/scss/suppliers.scss',
                 'resources/js/main.js'
             ],
             refresh: true,

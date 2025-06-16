@@ -1,13 +1,28 @@
 @extends('layouts.app')
 
+@section('title', 'Fornecedores | StockPRO')
+
+@push('suppliers-css')
+@vite('resources/scss/suppliers.scss')
+@endpush
+
 @section('content')
-    <div class="container">
-        <h1>Fornecedores</h1>
-        <a href="{{ route('suppliers.create') }}">Cadastrar fornecedor</a>
+    @session('status')
+            <div class="alert alert-success text-center" role="alert">
+                {{ $value }}
+            </div>
+        @endsession
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1><strong>Fornecedores</strong></h1>
+            <button type="button" class="btn btn-primary text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewSupplier">
+                Cadastrar Fornecedor
+            </button>
+        </div>
     </div>
     <div class="container mt-5">
-        <table class="table">
-            <thead>
+        <table class="table table-hover table-striped">
+            <thead class="table-primary">
                 <tr>
                     <th scope="col">Nome / Razão Social</th>
                     <th scope="col">E-mail</th>
@@ -54,4 +69,6 @@
             </tbody>
         </table>
     </div>
+
+@include('suppliers.partials.create')
 @endsection

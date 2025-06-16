@@ -1,0 +1,13 @@
+@import 'components/toast';
+
+.container{
+    padding: 0px;
+    max-width: 70%;
+}
+
+.table {
+  border-collapse: separate !important; /* importante para permitir bordas arredondadas */
+  border-spacing: 0; /* remove espaçamento */
+  border-radius: 0.6rem; /* define o arredondamento */
+  border: 1px solid #dee2e6; /* borda da tabela (igual do bootstrap) */
+}
