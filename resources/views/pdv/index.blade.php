@@ -202,7 +202,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(resposta) {
-                    alert('Venda salva com sucesso!');
+                    alert('Venda realizada com sucesso!');
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText);

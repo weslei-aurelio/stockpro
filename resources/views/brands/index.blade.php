@@ -33,8 +33,8 @@
             </form>
         </div>
     </nav>
-    <table class="table custom-table">
-        <thead>
+    <table class="table table-hover table-striped">
+        <thead class=table-primary>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Marca</th>

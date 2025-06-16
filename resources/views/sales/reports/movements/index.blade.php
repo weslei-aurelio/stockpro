@@ -7,8 +7,8 @@
     <div class="container mt-4">
         <h1>Relatório de movimentação</h1>
         <div class="container mt-4">
-            <table class="table table-bordered table-striped">
-            <thead>
+            <table class="table table-bordered table-striped table-hover">
+            <thead class="table-primary">
                 <tr>
                     <th scope="col">Data de venda</th>
                     <th scope="col">Produto</th>

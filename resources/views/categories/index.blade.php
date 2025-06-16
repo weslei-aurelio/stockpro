@@ -19,8 +19,8 @@
     </div>
     <div class="container">
         <h1 class="text-center m-5">Categorias</h1>
-        <table class="table">
-            <thead>
+        <table class="table table-hover table-striped">
+            <thead class="table-primary">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Categoria</th>

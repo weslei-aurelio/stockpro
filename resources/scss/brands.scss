@@ -1,23 +1,13 @@
 @import 'components/toast';
 
-.bg-brands{
-    padding: 3rem;
-    background-image: linear-gradient(to right, #90EE90, #00FF00);
-    border-radius: 3rem;
-}
-
 .container{
     padding: 0px;
     max-width: 70%;
 }
 
-.custom-table td{
-    background-color: #f5f5f5;
-    padding: 1.5rem;
+.table {
+  border-collapse: separate !important; /* importante para permitir bordas arredondadas */
+  border-spacing: 0; /* remove espaçamento */
+  border-radius: 0.6rem; /* define o arredondamento */
+  border: 1px solid #dee2e6; /* borda da tabela (igual do bootstrap) */
 }
-
-.custom-table th{
-    background-color: #f5f5f5;
-    padding: 1.5rem;
-}
-
