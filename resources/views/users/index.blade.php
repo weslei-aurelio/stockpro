@@ -14,7 +14,7 @@
     @endsession
     <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1><strong>Usuários Oi</strong></h1>
+        <h1><strong>Usuários</strong></h1>
        <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewUser">
             + Novo usuário
         </button>
@@ -37,8 +37,8 @@
                 </form>
             </div>
         </nav>
-        <table class="table custom-table">
-            <thead>
+        <table class="table table-hover table-striped">
+            <thead class="table-primary">
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">E-mail</th>
@@ -53,7 +53,7 @@
                     <td>{{ $user->email }}</td>
                     <th>{{ $user->status->name}}</th>
                     <td>
-                        <div class="btn-group dropup">
+                        <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
