@@ -49,7 +49,7 @@
                 <td>{{ $user->email }}</td>
                 <th scope="col">{{ $user->status->name}}</th>
                 <td>
-                    <div class="btn-group dropup">
+                    <div class="btn-group">
                         <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical text-dark" viewBox="0 0 16 16">
                                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
@@ -67,7 +67,7 @@
                                 @else
                                 <form action="{{ url('users/' . $user->id . '/activate') }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Ativar</button>
+                                    <button type="submit" class="dropdown-item text-success">Ativar</button>
                                 </form>
                                 @endif
                             </li>

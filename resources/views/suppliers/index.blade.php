@@ -71,4 +71,6 @@
     </div>
 
 @include('suppliers.partials.create')
+@include('layouts.components.alert')
+
 @endsection

@@ -32,8 +32,5 @@ class SupplierController extends Controller
 
         request()->session()->flash('success', 'Fornecedor cadastrado com sucesso');
         return redirect()->route('suppliers.index');
-
-        // return redirect()
-        //     ->route('suppliers.index');
     }
 }
