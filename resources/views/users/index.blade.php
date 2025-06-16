@@ -37,74 +37,112 @@
                 </form>
             </div>
         </nav>
-    <table class="table table-hover table-striped">
-        <thead class="table-primary">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Status</th>
-                <th scope="col">Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($users as $user)
-            <tr>
-                <th scope="row">{{ $user->id }}</th>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <th scope="col">{{ $user->status->name}}</th>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical text-dark" viewBox="0 0 16 16">
-                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                            </svg>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
-                            <li><a href="/users/{{ $user->id }}" class="dropdown-item">Editar</a></li>
-                            <li>
-                                @if ($user->status_id == 1)
-                                <form action="{{ url('users/' . $user->id . '/inactivate') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item text-danger">Inativar</button>
-                                </form>
-                                @else
-                                <form action="{{ url('users/' . $user->id . '/activate') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item text-success">Ativar</button>
-                                </form>
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                 </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-@include('users.create')
-@include('layouts.components.alert')
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <th>{{ $user->status->name}}</th>
+                    <td>
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    fill="currentColor" 
+                                    class="bi bi-three-dots-vertical text-dark" 
+                                    viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
+                                <li>
+                                    <button type="button" 
+                                        class="dropdown-item"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#EditUser"
+                                        data-user-id="{{ $user->id }}"
+                                        data-user-name="{{ $user->name }}"
+                                        data-user-email="{{ $user->email }}">
+                                        Editar
+                                    </button>
+                                </li>
+                                <li>
+                                    @if ($user->status_id == 1)
+                                    <form action="{{ route('users.inactivate', $user->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                    </form>
+                                    @else
+                                    <form action="{{ route('users.activate', $user->id )}}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                    </form>
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    @include('layouts.components.alert')
+    @include('users.partials.create')
+    @include('users.partials.edit')
+    @if ($errors->create->any())
+        <script>
+            window.onload = function() {
+                var newUserModal = new bootstrap.Modal(document.getElementById('NewUser'));
+                newUserModal.show();
+            }
+        </script>
+    @endif
+    @if ($errors->edit->any())
+        <script>
+            window.onload = function() {
+                var editUserModal = new bootstrap.Modal(document.getElementById('EditUser'));
+                editUserModal.show();
+            }
+        </script>
+    @endif
+@endsection
 
+@section('scripts')
+// preencher os inputs da modal editar usuário
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const modal = document.getElementById('EditUser');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function (event) {
+                const button  = event.relatedTarget;
+                const name    = button.getAttribute('data-user-name');
+                const email   = button.getAttribute('data-user-email');
+                const id      = button.getAttribute('data-user-id');
+
+                document.getElementById('editName').value  = name;
+                document.getElementById('editEmail').value = email;
+
+                const form  = document.getElementById('editUserForm');
+                form.action = `/users/${id}/edit`;
+            });
+        }
+    });
+</script>
 @endsection
 
 
