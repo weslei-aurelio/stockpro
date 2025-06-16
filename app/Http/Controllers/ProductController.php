@@ -6,6 +6,7 @@ use \App\Models\Brand;
 use \App\Models\Category;
 use App\Models\Product;
 use Illuminate\Validation\Rules\Exists;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -41,16 +42,30 @@ class ProductController extends Controller
         $data['purchaseValue']  = formatToDecimal($data['purchaseValue']);
         $data['salePrice']      = formatToDecimal($data['salePrice']);
         $data['profitMargin']   = formatToDecimal($data['profitMargin']);
-
         Product::create($data);
 
         request()->session()->flash('success', 'Produto Cadastrado com Sucesso');
-
         return redirect()->route('products.index');
+    }
 
-        // return redirect()
-        //     ->route('products.index')
-        //     ->with('status', 'Produto cadastro com sucesso!');
+    public function update(Product $product, Request $request) 
+    {
+        $validator = Validator::make($request->all(), [
+            'description'   => 'required|string',
+            'brand_id'      => ['required', 'exists:brands,id'],
+            'category_id'   => ['required', 'exists:categories,id'],
+            'purchaseValue' => 'required|string',
+            'salePrice'     => 'required|string',
+            'profitMargin'  => 'required|string',
+            'numberUnits'   => 'required|integer'
+        ]);
+      
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'edit')
+                ->withInput();
+        }
+
     }
 
     public function search(Request $request) 
