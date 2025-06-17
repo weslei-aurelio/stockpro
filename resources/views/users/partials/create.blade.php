@@ -74,18 +74,9 @@
                         <input 
                             type="password" 
                             name="password_confirmation" 
-                            class="form-control" 
-                            id="confirmPasswordField" 
+                            class="form-control"  
                             placeholder="Confirmar Senha"
                         >
-                        <label for="confirmPasswordField">Confirmar Senha</label>
-                        {{-- Validar, pois não está funcionando! --}}
-                        <span 
-                            class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3" 
-                            onclick="togglePassword('confirmPasswordField', this)"
-                        >
-                            <i class="fa-solid fa-eye"></i>
-                        </span>
                     </div>
                     <div class="modal-footer">
                         <a 
@@ -104,21 +95,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    // funcionalidade para visualizar/esconder a senha digitada pelo usuário
-    function togglePassword(fieldId, toggleElement) {
-        const passwordInput = document.getElementById(fieldId);
-        const icon = toggleElement.querySelector('i');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
-</script>

@@ -16,10 +16,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('users.update', ['user' => '__ID__'])  }}" method="POST" id="editUserForm">
+                <form action="{{ url('/users/__ID__/edit') }}" method="POST" id="editUserForm">
                     @csrf
                     @method('PUT')
                     <div class="form-floating mb-3">
+                        <input type="hidden" name="id" value="{{ old('id') }}" id="userID">
                         <input
                             type="text"
                             name="name"
@@ -66,7 +67,6 @@
                             type="password" 
                             name="password_confirmation" 
                             class="form-control" 
-                            id="confirmPasswordField" 
                             class="form-control @error('password', 'edit') is-invalid @enderror"
                         >
                         @error('password', 'edit')
@@ -92,21 +92,3 @@
         </div>
     </div>
 </div>
-{{-- 
-<script>
-    // funcionalidade para visualizar/esconder a senha digitada pelo usuário
-    function togglePassword(fieldId, toggleElement) {
-        const passwordInput = document.getElementById(fieldId);
-        const icon = toggleElement.querySelector('i');
-
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
-</script> --}}

@@ -114,6 +114,14 @@
         <script>
             window.onload = function() {
                 var editUserModal = new bootstrap.Modal(document.getElementById('EditUser'));
+
+                // Repõe os valores antigos
+                document.getElementById('editName').value  = "{{ old('name') }}";
+                document.getElementById('editEmail').value = "{{ old('email') }}";
+
+                const form = document.getElementById('editUserForm');
+                form.action = form.action.replace('__ID__', "{{ old('id') }}");
+
                 editUserModal.show();
             }
         </script>
@@ -136,9 +144,11 @@
 
                 document.getElementById('editName').value  = name;
                 document.getElementById('editEmail').value = email;
+                document.getElementById('userID').value    = id;
 
                 const form  = document.getElementById('editUserForm');
-                form.action = `/users/${id}/edit`;
+                form.action = form.action.replace('__ID__', id);
+                console.log(form.action);
             });
         }
     });

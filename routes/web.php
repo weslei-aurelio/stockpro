@@ -7,9 +7,6 @@ use App\Http\Controllers\PdvController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SupplierController;
-
-
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
