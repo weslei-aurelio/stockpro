@@ -138,9 +138,9 @@
                 document.getElementById('EditDescription').value   = description;
                 document.getElementById('editBrand').value         = brand;
                 document.getElementById('editCategory').value      = category;
-                document.getElementById('editpurchaseValue').value = purchaseValue;
-                document.getElementById('editsalePrice').value     = salePrice;
-                document.getElementById('editprofitMargin').value  = profitMargin;
+                document.getElementById('editPurchaseValue').value = purchaseValue;
+                document.getElementById('editSalePrice').value     = salePrice;
+                document.getElementById('editProfitMargin').value  = profitMargin;
                 document.getElementById('editNumberUnits').value   = numberUnits;
 
                 // Atualiza o action do formulário
@@ -150,6 +150,4 @@
         }
     });
 </script>
-
-
 @endsection

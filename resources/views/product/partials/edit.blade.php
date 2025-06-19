@@ -28,14 +28,12 @@
                     <div class="mb-3">
                         <label for="brand" class="form-label">Marca</label>
                         <div class="d-flex align-items-center gap-2">
-
                             <select class="form-select" name="brand_id" id="editBrand">
                                 <option selected>Selecione</option>
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->id }}"> {{$brand->name}} </option>
                                 @endforeach
                             </select>
-
                             <a href="{{ route('brands.create') }}">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
@@ -78,7 +76,7 @@
                             Valor de compra (unidade)
                         </label>
                         <input
-                            id="editpurchaseValue"
+                            id="editPurchaseValue"
                             type="text"
                             name="purchaseValue"
                             class="form-control money"
@@ -91,7 +89,7 @@
                             Valor de venda (unidade)
                         </label>
                         <input
-                            id="editsalePrice"
+                            id="editSalePrice"
                             type="text"
                             name="salePrice"
                             class="form-control money"
@@ -104,7 +102,7 @@
                             Lucro Desejado (%)
                         </label>
                         <input
-                            id="editprofitMargin"
+                            id="editProfitMargin"
                             type="text"
                             name="profitMargin"
                             class="form-control percent"
@@ -134,45 +132,4 @@
         </div>
     </div> 
 </div>       
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const costInput   = document.getElementById('editpurchaseValue');
-        const saleInput   = document.getElementById('editSalePrice');
-        const marginInput = document.getElementById('editProfitMargin');
-
-        function parseValue(value) {
-            return parseFloat(value.replace(/\./g, '').replace(',', '.')) || 0;
-        }
-
-        function formatCurrency(value) {
-            return value.toFixed(2).replace('.', ',');
-        }
-
-        // Atualiza margem (de lucro) com base no valor de venda
-        saleInput.addEventListener('blur', function () {
-            const cost = parseValue(costInput.value);
-            const sale = parseValue(saleInput.value);
-
-            if (cost > 0 && sale > 0) {
-                // margem = ((venda - custo) / venda) * 100
-                const margin = ((sale - cost) / sale) * 100;
-                marginInput.value = formatCurrency(margin);
-            }
-        });
-
-        // Atualiza valor de venda com base na margem (de lucro)
-        marginInput.addEventListener('blur', function () {
-            const cost = parseValue(costInput.value);
-            const margin = parseValue(marginInput.value);
-
-            if (cost > 0 && margin > 0 && margin < 100) {
-                // venda = custo / (1 - margem/100)
-                const sale = cost / (1 - (margin / 100));
-                saleInput.value = formatCurrency(sale);
-            }
-        });
-    });
-</script>
 

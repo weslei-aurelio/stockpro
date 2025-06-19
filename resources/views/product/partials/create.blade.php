@@ -111,7 +111,7 @@
                         >
                     </div>
                     <div class="modal-footer">
-                        <a href="/products" class="text-decoration-none text-dark">Cancelar</a>
+                        <a href="{{ route('products.index') }}" class="text-decoration-none text-dark">Cancelar</a>
                         <button type="submit" class="btn btn-primary text-white custom-button-create">Salvar</button>
                     </div>
                 </form>
@@ -119,45 +119,3 @@
         </div>
     </div> 
 </div>       
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const costInput = document.getElementById('purchaseValue');
-        const saleInput = document.getElementById('salePrice');
-        const marginInput = document.getElementById('profitMargin');
-
-        function parseValue(value) {
-            return parseFloat(value.replace(/\./g, '').replace(',', '.')) || 0;
-        }
-
-        function formatCurrency(value) {
-            return value.toFixed(2).replace('.', ',');
-        }
-
-        // Atualiza margem (de lucro) com base no valor de venda
-        saleInput.addEventListener('blur', function () {
-            const cost = parseValue(costInput.value);
-            const sale = parseValue(saleInput.value);
-
-            if (cost > 0 && sale > 0) {
-                // margem = ((venda - custo) / venda) * 100
-                const margin = ((sale - cost) / sale) * 100;
-                marginInput.value = formatCurrency(margin);
-            }
-        });
-
-        // Atualiza valor de venda com base na margem (de lucro)
-        marginInput.addEventListener('blur', function () {
-            const cost = parseValue(costInput.value);
-            const margin = parseValue(marginInput.value);
-
-            if (cost > 0 && margin > 0 && margin < 100) {
-                // venda = custo / (1 - margem/100)
-                const sale = cost / (1 - (margin / 100));
-                saleInput.value = formatCurrency(sale);
-            }
-        });
-    });
-</script>
-

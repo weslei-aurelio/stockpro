@@ -37,11 +37,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('categories/create',  [CategoryController::class, 'create'])->name('categories.create');
     Route::post('categories/create', [CategoryController::class, 'store'])->name('categories.store');
 
-    Route::get('/products',            [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create',     [ProductController::class, 'create'])->name('products.create');
+    Route::get('/products',                 [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create',          [ProductController::class, 'create'])->name('products.create');
     Route::post('/products/{product}/edit', [ProductController::class, 'update'])->name('products.update');
-    Route::post('/products/create',    [ProductController::class, 'store'])->name('products.store');
-    Route::get('/search-products',     [ProductController::class, 'search']);
+    Route::post('/products/create',         [ProductController::class, 'store'])->name('products.store');
+    Route::get('/search-products',          [ProductController::class, 'search']);
     
     Route::get('/pdv',                   [PdvController::class, 'index'])->name('pdv.index');
     Route::post('/sales',                [PdvController::class, 'storeSale'])->name('pdv.storeSale');
