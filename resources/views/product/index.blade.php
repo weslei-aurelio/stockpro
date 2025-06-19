@@ -50,7 +50,7 @@
                 <tr>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td>{{ $product->salePrice}}</td>
+                    <td>R$ {{ money_mask($product->salePrice) }}</td>
                     <td>{{ $product->numberUnits }}</td>
                      <td>Pendente</td>
                     <td>
@@ -76,9 +76,9 @@
                                         data-description="{{ $product->description }}"
                                         data-brand="{{ $product->brand_id }}"
                                         data-category="{{ $product->category_id }}"
-                                        data-purchaseValue="{{ $product->purchaseValue }}"
-                                        data-salePrice="{{ $product->salePrice }}"
-                                        data-profitMargin="{{ $product->profitMargin }}"
+                                        data-purchaseValue="{{ money_mask($product->purchaseValue)}}"
+                                        data-salePrice="{{ money_mask($product->salePrice) }}"
+                                        data-profitMargin="{{ money_mask($product->profitMargin) }}"
                                         data-numberUnits="{{ $product->numberUnits }}"
                                     >
                                     Editar

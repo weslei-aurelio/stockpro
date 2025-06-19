@@ -29,6 +29,7 @@ class ProductController extends Controller
 
     public function store (Request $request)
     {
+        
         $data = $request->validate([
             'description'   => 'required|string',
             'brand_id'      => ['required', 'exists:brands,id'],
@@ -73,6 +74,7 @@ class ProductController extends Controller
         $product->salePrice     = formatToDecimal($request->salePrice);
         $product->profitMargin  = formatToDecimal($request->profitMargin);
         $product->numberUnits   = $request->numberUnits;
+
         $product->save();
 
         request()->session()->flash('success', 'Produto atualizado com sucesso!');

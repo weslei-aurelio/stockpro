@@ -1,0 +1,56 @@
+array:8 [▼ // app/Http/Controllers/ProductController.php:32
+  "_token" => "fIw4xvNLCmuOcIZ3fQyx1CYjPgVOPEP0USB0vEkR"
+  "description" => "Chiclets Bubbaloo"
+  "brand_id" => "7"
+  "category_id" => "7"
+  "purchaseValue" => "1,00"
+  "salePrice" => "1,50"
+  "profitMargin" => "33,33"
+  "numberUnits" => "50"
+]
+
+
+array:8 [▼ // app/Http/Controllers/ProductController.php:32
+  "_token" => "fIw4xvNLCmuOcIZ3fQyx1CYjPgVOPEP0USB0vEkR"
+  "description" => "Cerveja Brahma 1L"
+  "brand_id" => "1"
+  "category_id" => "1"
+  "purchaseValue" => "9,00"
+  "salePrice" => "15,00"
+  "profitMargin" => "40,00"
+  "numberUnits" => "18"
+
+
+----------------- 
+Realizar update do ProductController
+
+
+array:8 [▼ // app/Http/Controllers/ProductController.php:54
+  "_token" => "fIw4xvNLCmuOcIZ3fQyx1CYjPgVOPEP0USB0vEkR"
+  "description" => "Cerveja Amstel 350ml"
+  "brand_id" => "2"
+  "category_id" => "1"
+  "purchaseValue" => "10,00"
+  "salePrice" => "15,00"
+  "profitMargin" => "33,33"
+  "numberUnits" => "20"
+
+
+
+// sem realizar a alteração dos inputs
+
+array:8 [▼ // app/Http/Controllers/ProductController.php:54
+  "_token" => "fIw4xvNLCmuOcIZ3fQyx1CYjPgVOPEP0USB0vEkR"
+  "description" => "Cerveja Amstel 350ml"
+  "brand_id" => "2"
+  "category_id" => "1"
+  "purchaseValue" => "3.50"
+  "salePrice" => "5.50"
+  "profitMargin" => "36.36"
+  "numberUnits" => "400"
+]
+
+Obs: neste caso, preciso de duas conversões:
+Money to decimal
+Decimal to money
+

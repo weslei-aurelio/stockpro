@@ -9,3 +9,8 @@ if(!function_exists('formatToDecimal')) {
         return number_format((float) $valorFormatado, 2, '.', '');
     }
 }
+
+function money_mask($amount)
+{
+    return (number_format($amount, 2, ',', '') !== null ? number_format($amount, 2, ',', '.') : '');
+}
