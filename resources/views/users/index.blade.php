@@ -138,6 +138,7 @@
         if (modal) {
             modal.addEventListener('show.bs.modal', function (event) {
                 const button  = event.relatedTarget;
+                
                 const name    = button.getAttribute('data-user-name');
                 const email   = button.getAttribute('data-user-email');
                 const id      = button.getAttribute('data-user-id');
