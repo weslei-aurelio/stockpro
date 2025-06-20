@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Produtos Mais Vendidos | StockPRO')
+
 @section('content')
     <div class="container-fluix bg-dark text-white">
         <p class="text-center">Aqui será criado a parte dos filtros</p>
