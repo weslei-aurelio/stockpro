@@ -37,7 +37,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="5" class="text-end"><strong>Total:</strong></td>
-                        <td class="text-danger"><strong>R$ {{ number_format($totalLucro, 2, ',', '.') }}</strong></td>
+                        <td class="text-success"><strong>R$ {{ number_format($totalLucro, 2, ',', '.') }}</strong></td>
                     </tr>
                 </tfoot>
             </table>
