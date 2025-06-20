@@ -10,11 +10,13 @@
         @vite(['resources/scss/styles.scss', 'resources/js/main.js'])
         <title>@yield('title')</title>
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <!-- Inserção CSRF Token para requisições http utilizando AJAX formulário pdv -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.components.header')
-        @yield('content')
+        <main class="flex-grow-1">
+            @yield('content')
+        </main>
         @include('layouts.components.footer')
         @stack('index-css')
         @stack('products-css')

@@ -3,8 +3,8 @@
 @section('title', 'Produtos Mais Vendidos | StockPRO')
 
 @section('content')
-    <div class="container-fluix bg-dark text-white">
-        <p class="text-center">Aqui será criado a parte dos filtros</p>
+    <div class="container my-3">
+        <x-date-range-filter action="/best-selling-products" />
     </div>
     <div class="container mt-4">
         <h1>Produtos mais vendidos</h1>

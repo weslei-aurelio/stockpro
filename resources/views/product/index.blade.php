@@ -54,7 +54,7 @@
                     <td>{{ $product->numberUnits }}</td>
                      <td>Pendente</td>
                     <td>
-                        <div class="btn-group dropup">
+                        <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
