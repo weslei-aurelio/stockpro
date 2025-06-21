@@ -7,6 +7,7 @@ use \App\Models\Category;
 use App\Models\Product;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Status;
 
 class ProductController extends Controller
 {
@@ -91,5 +92,23 @@ class ProductController extends Controller
                        ->get(['id', 'description', 'salePrice']);
 
         return response()->json($products);
+    }
+
+    public function inactivate(Product $product)
+    {
+        $product->status_id = Status::SUSPENSO;
+        $product->save();
+
+        request()->session()->flash('success', 'Produto inativado com sucesso!');
+        return redirect()->route('products.index');
+    }
+
+    public function activate(Product $product)
+    {
+        $product->status_id = Status::ATIVO;
+        $product->save();
+
+        request()->session()->flash('success', 'Produto ativado com sucesso!');
+        return redirect()->route('products.index');
     }
 }

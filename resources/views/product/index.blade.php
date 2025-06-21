@@ -9,31 +9,32 @@
 @section('content')
 @include('layouts.components.alert')
 <div class="container mt-5">
-        @session('status')
-            <div class="alert alert-success text-center" role="alert">
-                {{ $value }}
-            </div>
-        @endsession
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>
-                <strong>Produtos</strong>
-            </h1>
-            <button type="button" class="btn btn-primary text-white mb-4 custom-button" data-bs-toggle="modal" data-bs-target="#NewProduct">
-                + Novo Produto
-            </button>
+    @session('status')
+        <div class="alert alert-success text-center" role="alert">
+            {{ $value }}
         </div>
+    @endsession
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1><strong>Produtos</strong></h1>
+        <button type="button" class="btn btn-primary text-white mb-4 custom-button" data-bs-toggle="modal" data-bs-target="#NewProduct">
+            + Novo Produto
+        </button>
+    </div>
+
     <nav class="navbar">
         <div class="container-fluid">
             <form class="d-flex" role="search">
-                <input class="form-control me-2 navbar-brand" type="search" placeholder="Procurar" aria-label="Search"/>
+                <input class="form-control me-2 navbar-brand" type="search" placeholder="Procurar" aria-label="Search" />
                 <button class="btn btn-primary" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                 </button>
             </form>
         </div>
     </nav>
+
     <table class="table table-hover table-striped">
         <thead class="table-primary">
             <tr>
@@ -52,7 +53,7 @@
                     <td>{{ $product->category->name }}</td>
                     <td>R$ {{ money_mask($product->salePrice) }}</td>
                     <td>{{ $product->numberUnits }}</td>
-                     <td>Pendente</td>
+                    <td>{{ $product->status->name }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -68,7 +69,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
                                 <li>
-                                     <button
+                                    <button
                                         class="dropdown-item"
                                         data-bs-toggle="modal"
                                         data-bs-target="#EditProduct"
@@ -76,16 +77,28 @@
                                         data-description="{{ $product->description }}"
                                         data-brand="{{ $product->brand_id }}"
                                         data-category="{{ $product->category_id }}"
-                                        data-purchaseValue="{{ money_mask($product->purchaseValue)}}"
+                                        data-purchaseValue="{{ money_mask($product->purchaseValue) }}"
                                         data-salePrice="{{ money_mask($product->salePrice) }}"
                                         data-profitMargin="{{ money_mask($product->profitMargin) }}"
                                         data-numberUnits="{{ $product->numberUnits }}"
                                     >
-                                    Editar
+                                        Editar
                                     </button>
                                 </li>
                                 <li>
-                                  <a href="#" class="dropdown-item">Inativar</a>
+                                    @if ($product->status_id === \App\Models\Status::ATIVO)
+                                        <form action="{{ route('products.inactivate', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('products.activate', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="dropdown-item text-success">Ativar</button>
+                                        </form>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -94,6 +107,7 @@
             @endforeach
         </tbody>
     </table>
+
     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
             <li class="page-item">
@@ -112,12 +126,13 @@
         </ul>
     </nav>
 </div>
+
 @include('product.partials.create')
 @include('product.partials.edit')
 @endsection
 
 @section('scripts')
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('EditProduct');
 
@@ -134,7 +149,6 @@
                 const profitMargin  = button.getAttribute('data-profitMargin');
                 const numberUnits   = button.getAttribute('data-numberUnits');
 
-                // Preenche os campos da modal
                 document.getElementById('EditDescription').value   = description;
                 document.getElementById('editBrand').value         = brand;
                 document.getElementById('editCategory').value      = category;
@@ -143,9 +157,8 @@
                 document.getElementById('editProfitMargin').value  = profitMargin;
                 document.getElementById('editNumberUnits').value   = numberUnits;
 
-                // Atualiza o action do formulário
-                const form  = document.getElementById('editProductForm');
-                const teste = form.action = `/products/${id}/edit`;
+                const form = document.getElementById('editProductForm');
+                form.action = `/products/${id}/edit`;
             });
         }
     });

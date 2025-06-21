@@ -14,7 +14,8 @@ class Product extends Model
         'purchaseValue',
         'salePrice',
         'profitMargin',
-        'numberUnits'
+        'numberUnits',
+        'status_id'
     ];
     
     public function brand(): BelongsTo
@@ -25,5 +26,10 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
     }
 }
