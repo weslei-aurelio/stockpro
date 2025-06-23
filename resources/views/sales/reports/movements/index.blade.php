@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Relatório de Movimentação | StockPRO')
+
 @section('content')
-    <div class="container-fluix bg-dark text-white">
-        <p class="text-center">Aqui será criado a parte dos filtros</p>
-    </div>
+<div class="container my-3">
+    <x-date-range-filter action="/movement-report" />
+</div>
     <div class="container mt-4">
         <h1>Relatório de movimentação</h1>
         <div class="container mt-4">
@@ -35,7 +37,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="5" class="text-end"><strong>Total:</strong></td>
-                        <td class="text-danger"><strong>R$ {{ number_format($totalLucro, 2, ',', '.') }}</strong></td>
+                        <td class="text-success"><strong>R$ {{ number_format($totalLucro, 2, ',', '.') }}</strong></td>
                     </tr>
                 </tfoot>
             </table>

@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center vh-100">
+<div class="d-flex justify-content-center align-items-center">
     <div class="container py-4 bg-pdv">
         <h1 class="text-primary text-center">PDV</h1>
     <!-- Pesquisa -->
