@@ -99,9 +99,11 @@
             </tbody>
         </table>
     </div>
-    @include('layouts.components.alert')
+   
     @include('users.partials.create')
     @include('users.partials.edit')
+    @include('layouts.components.alert')
+
     @if ($errors->create->any())
         <script>
             window.onload = function() {
@@ -110,6 +112,7 @@
             }
         </script>
     @endif
+
     @if ($errors->edit->any())
         <script>
             window.onload = function() {

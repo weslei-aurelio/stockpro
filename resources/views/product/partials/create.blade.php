@@ -19,10 +19,15 @@
                         <input
                             type="text"
                             name="description"
-                            class="form-control"
+                            class="form-control @error('description', 'create') is-invalid @enderror"
                             value="{{ old('description') }}"
                             placeholder="Ex: Cerveja Amstel 350ml"
                         >
+                        @error('description', 'create')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="brand" class="form-label">Marca</label>
@@ -49,14 +54,13 @@
                                 @foreach ($categories as $category)
                                        <option value="{{ $category->id }}"> {{$category->name}} </option>
                                 @endforeach
-                                </select>
-                                </select>
-                                <a href="{{ route('categories.index') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            </select>
+                            <a href="{{ route('categories.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                                 </svg>
-                                </a>
+                            </a>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -67,10 +71,15 @@
                             id="purchaseValue"
                             type="text"
                             name="purchaseValue"
-                            class="form-control money"
+                            class="form-control money @error('purchaseValue', 'create') is-invalid @enderror"
                             value="{{ old('purchaseValue') }}"
                             placeholder="0,00"
                         >
+                        @error('purchaseValue', 'create')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="salePrice">
@@ -80,10 +89,15 @@
                             id="salePrice"
                             type="text"
                             name="salePrice"
-                            class="form-control money"
+                            class="form-control money @error('salePrice', 'create') is-invalid @enderror"
                             value="{{ old('salePrice') }}"
                             placeholder="0,00"
                         >
+                        @error('salePrice', 'create')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="profitMargin">
@@ -93,10 +107,15 @@
                             id="profitMargin"
                             type="text"
                             name="profitMargin"
-                            class="form-control percent"
+                            class="form-control percent @error('profitMargin', 'create') is-invalid @enderror"
                             value="{{ old('profitMargin') }}"
                             placeholder="Ex: 25,00"
                         >
+                        @error('profitMargin', 'create')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="numberUnits">
@@ -105,10 +124,15 @@
                         <input
                             type="number"
                             name="numberUnits"
-                            class="form-control"
+                            class="form-control @error('numberUnits', 'create') is-invalid @enderror"
                             value="{{ old('numberUnits') }}"
                             placeholder="Ex: 200"
                         >
+                        @error('numberUnits', 'create')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                         <a href="{{ route('products.index') }}" class="text-decoration-none text-dark">Cancelar</a>

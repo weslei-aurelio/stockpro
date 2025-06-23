@@ -114,6 +114,16 @@
 </div>
 @include('product.partials.create')
 @include('product.partials.edit')
+
+@if ($errors->create->any())
+    <script>
+        window.onload = function() {
+            var NewProductModel = new bootstrap.Modal(document.getElementById('NewProduct'));
+            NewProductModel.show();
+        }
+    </script>
+@endif
+
 @endsection
 
 @section('scripts')

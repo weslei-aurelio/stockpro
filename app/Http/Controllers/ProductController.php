@@ -29,8 +29,9 @@ class ProductController extends Controller
 
     public function store (Request $request)
     {
-        
-        $data = $request->validate([
+        $product = new Product();
+
+        $validator = Validator::make($request->all(), [
             'description'   => 'required|string',
             'brand_id'      => ['required', 'exists:brands,id'],
             'category_id'   => ['required', 'exists:categories,id'],
@@ -40,12 +41,22 @@ class ProductController extends Controller
             'numberUnits'   => 'required|integer'
         ]);
 
-        $data['purchaseValue']  = formatToDecimal($data['purchaseValue']);
-        $data['salePrice']      = formatToDecimal($data['salePrice']);
-        $data['profitMargin']   = formatToDecimal($data['profitMargin']);
-        Product::create($data);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'create')
+                ->withInput();
+        }
 
-        request()->session()->flash('success', 'Produto Cadastrado com Sucesso');
+        $product->description   = $request->description;
+        $product->brand_id      = $request->brand_id;
+        $product->category_id   = $request->category_id;
+        $product->purchaseValue = formatToDecimal($request->purchaseValue);
+        $product->salePrice     = formatToDecimal($request->salePrice);
+        $product->profitMargin  = formatToDecimal($request->profitMargin);
+
+        $product->save();
+
+        request()->session()->flash('success', 'Produto Cadastrado com sucesso!');
         return redirect()->route('products.index');
     }
 
