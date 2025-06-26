@@ -53,7 +53,7 @@
                     <td>{{ $product->category->name }}</td>
                     <td>R$ {{ money_mask($product->salePrice) }}</td>
                     <td>{{ $product->numberUnits }}</td>
-                    <td>{{ $product->status->name }}</td>
+                    <td class="{{ $product->status_id == 1 ? 'text-success': 'text-danger'}}">{{ $product->status->name }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">

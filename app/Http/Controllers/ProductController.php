@@ -15,7 +15,11 @@ class ProductController extends Controller
     {
         $brands = Brand::all();
         $categories = Category::all();
-        $products = Product::all();
+        
+        $products = Product::with('category')
+            ->orderBy('status_id')
+            ->orderBy('category_id')
+            ->get();
         
         return view('product.index', compact('brands', 'categories', 'products'));
     }
