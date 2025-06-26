@@ -199,6 +199,11 @@
 
         $('#btnFinalizar').on('click', function() {
 
+            if (vendaItens.length === 0) {
+                alert("Adicione ao menos um item para finalizar a venda.");
+                return;
+            }
+
             console.log(JSON.stringify({
                 items: vendaItens,
                 total: totalGeral
@@ -208,21 +213,38 @@
                 url: '/sales',
                 method: 'POST',
                 contentType: 'application/json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 data: JSON.stringify({
                     items: vendaItens,
                     total: totalGeral
                 }),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
                 success: function(resposta) {
-                    alert('Venda realizada com sucesso!');
+                    alert(resposta.message);
+
+                    // Limpa a lista interna
+                    vendaItens = [];
+
+                    // Limpa tabela visual
+                    $('#tabelaProdutos tbody').empty();
+
+                    // Zera o total geral
+                    totalGeral = 0;
+                    $('#totalGeral').text(money_mask.format(totalGeral));
+
+                    // Limpa campos de entrada
+                    $('#selectedProductId').val('');
+                    $('#selectedProduct').val('');
+                    $('#quantity').val(1);
+                    $('#search-product').val('');
+                    $('#suggestions').empty();
                 },
                 error: function(xhr) {
+                    alert("Erro ao finalizar venda.");
                     console.log(xhr.responseText);
                 }
             });
-
         });
 
     </script>
