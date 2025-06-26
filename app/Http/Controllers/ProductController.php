@@ -11,16 +11,20 @@ use App\Models\Status;
 
 class ProductController extends Controller
 {
-    public function index ()
+    public function index (Request $request)
     {
+        $products = Product::query();
         $brands = Brand::all();
         $categories = Category::all();
-        
+
         $products = Product::with('category')
             ->orderBy('status_id')
             ->orderBy('category_id')
-            ->get();
-        
+            ->when($request->keyword, function ($query, $keyword) {
+                $query->where('description', 'like', '%' . $keyword . '%');
+            })
+            ->paginate(10);
+
         return view('product.index', compact('brands', 'categories', 'products'));
     }
 
@@ -58,6 +62,7 @@ class ProductController extends Controller
         $product->purchaseValue = formatToDecimal($request->purchaseValue);
         $product->salePrice     = formatToDecimal($request->salePrice);
         $product->profitMargin  = formatToDecimal($request->profitMargin);
+        $product->numberUnits   = $request->numberUnits;
 
         $product->save();
 
