@@ -22,7 +22,13 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <form class="d-flex" role="search">
-                <input class="form-control me-2 navbar-brand" type="search" placeholder="Procurar" aria-label="Search"/>
+                    <input  
+                        class="form-control me-2 navbar-brand" 
+                        type="text" 
+                        name="keyword"
+                        placeholder="Nome do usuário" 
+                        aria-label="Search"
+                    />
                     <button class="btn btn-primary" type="submit">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -34,6 +40,9 @@
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                         </svg>
                     </button>
+                    @if(request('keyword'))
+                        <a href="{{ route('users.index') }}" class="btn btn-secondary">Limpar Filtro</a>
+                    @endif
                 </form>
             </div>
         </nav>
@@ -51,7 +60,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <th>{{ $user->status->name}}</th>
+                    <td class="{{ $user->status_id == 1 ? 'text-success': 'text-danger'}}">{{ $user->status->name}}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">

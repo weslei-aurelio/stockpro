@@ -9,9 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index ()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::query()
+            ->orderBy('status_id')
+            ->orderBy('name')
+            ->when($request->keyword, function ($query, $keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })
+            ->paginate(10);
+
         return view('users.index', compact('users'));
     }
 
@@ -85,5 +92,4 @@ class UserController extends Controller
         request()->session()->flash('success', 'Usuário ativado com sucesso');
         return redirect()->route('users.index');
     }
-
 }

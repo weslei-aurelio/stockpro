@@ -13,8 +13,8 @@ class ProductController extends Controller
 {
     public function index (Request $request)
     {
-        $products = Product::query();
-        $brands = Brand::all();
+        $products   = Product::query();
+        $brands     = Brand::all();
         $categories = Category::all();
 
         $products = Product::with('category')
