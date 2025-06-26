@@ -130,36 +130,50 @@
                 return;
             }
 
-            let totalItem = salePrice * quantity;
+             // Faz a verificação de estoque antes de adicionar
+            $.ajax({
+                url: `/check-stock/${id}`,
+                method: 'GET',
+                data: { quantidadeDesejada: quantity },
+                success: function(resposta) {
+                    if (resposta.disponivel) {
+                        // Estoque ok, adiciona o item na lista
 
-            // Adiciona na lista de venda
-            vendaItens.push({
-                id: id,
-                description: description,
-                quantity: quantity,
-                salePrice: salePrice,
-                totalItem: totalItem
+                        let totalItem = salePrice * quantity;
+
+                        vendaItens.push({
+                            id: id,
+                            description: description,
+                            quantity: quantity,
+                            salePrice: salePrice,
+                            totalItem: totalItem
+                        });
+
+                        $('#tabelaProdutos tbody').append(`
+                            <tr data-id="${id}">
+                                <td>${description}</td>
+                                <td>${quantity}</td>
+                                <td>${money_mask.format(salePrice)}</td>
+                                <td>${money_mask.format(totalItem)}</td>
+                                <td><button class="btn btn-danger btn-sm btn-remover">Remover</button></td>
+                            </tr>
+                        `);
+
+                        totalGeral += totalItem;
+                        $('#totalGeral').text(money_mask.format(totalGeral));
+
+                        $('#selectedProductId').val('');
+                        $('#selectedProduct').val('');
+                        $('#quantity').val(1);
+
+                    } else {
+                        alert(`Estoque insuficiente. Disponível: ${resposta.estoqueDisponivel} unidade(s).`);
+                    }
+                },
+                error: function() {
+                    alert("Erro ao verificar o estoque. Tente novamente.");
+                }
             });
-
-            // Adiciona na tabela visual
-            $('#tabelaProdutos tbody').append(`
-                <tr data-id="${id}">
-                    <td>${description}</td>
-                    <td>${quantity}</td>
-                    <td>${money_mask.format(salePrice)}</td>
-                    <td>${money_mask.format(totalItem)}</td>
-                    <td><button class="btn btn-danger btn-sm btn-remover">Remover</button></td>
-                </tr>
-            `);
-
-            // Atualiza o total geral
-            totalGeral += totalItem;
-            $('#totalGeral').text(money_mask.format(totalGeral));
-
-            // Limpa os campos para nova entrada
-            $('#selectedProductId').val('');
-            $('#selectedProduct').val('');
-            $('#quantity').val(1);
         });
 
         // Remove itens da lista e atualiza o total da venda

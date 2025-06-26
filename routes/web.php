@@ -40,10 +40,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/products/create',         [ProductController::class, 'store'])->name('products.store');
     Route::get('/search-products',          [ProductController::class, 'search']);
     Route::put('/products/{product}/inactivate', [ProductController::class, 'inactivate'])->name('products.inactivate');
-    Route::put('/products/{product}/activate', [ProductController::class, 'activate'])->name('products.activate');
+    Route::put('/products/{product}/activate',   [ProductController::class, 'activate'])->name('products.activate');
+    Route::get('/check-stock/{id}',              [ProductController::class, 'checkStockQuantity']);
+
     
-    Route::get('/pdv',                   [PdvController::class, 'index'])->name('pdv.index');
-    Route::post('/sales',                [PdvController::class, 'storeSale'])->name('pdv.storeSale');
+    Route::get('/pdv',    [PdvController::class, 'index'])->name('pdv.index');
+    Route::post('/sales', [PdvController::class, 'storeSale'])->name('pdv.storeSale');
     
     Route::get('/movement-report',       [SaleController::class, 'movementReport'])->name('movementReport.index');
     Route::get('/best-selling-products', [SaleController::class, 'bestSellingProducts'])->name('bestSellingProducts.index');

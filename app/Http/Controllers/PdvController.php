@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\SaleItem;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class PdvController extends Controller
@@ -56,7 +57,15 @@ class PdvController extends Controller
                     'item_total'    => $item['totalItem'],
                 ]);
 
-                // (opcional: atualizar estoque aqui)
+                // Atualizar o estoque do produto
+                $produto = Product::findOrFail($item['id']);
+
+                // Garante que o estoque nunca fique negativo
+                if ($produto->numberUnits < $item['quantity']) {
+                    throw new \Exception("Estoque insuficiente para o produto: {$produto->description}");
+                }
+
+                $produto->decrement('numberUnits', $item['quantity']);
             }
 
             DB::commit();

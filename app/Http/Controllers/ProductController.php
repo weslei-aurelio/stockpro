@@ -98,11 +98,30 @@ class ProductController extends Controller
         $query = $request->input('searchTerm');
 
         $products = Product::where('description', 'LIKE', "%{$query}%")
-                       ->orWhere('id', $query)
-                       ->limit(10)
-                       ->get(['id', 'description', 'salePrice']);
+                    ->where('status_id', '!=', Status::SUSPENSO)
+                    ->orWhere('id', $query)
+                    ->limit(10)
+                    ->get(['id', 'description', 'salePrice']);
 
         return response()->json($products);
+    }
+
+    public function checkStockQuantity($id, Request $request) 
+    {
+        $produto = Product::findOrFail($id);
+
+        $quantidadeDesejada = (int) $request->quantidadeDesejada;
+
+        if ($produto->numberUnits >= $quantidadeDesejada) {
+            return response()->json([
+                'disponivel' => true
+            ]);
+        }
+
+        return response()->json([
+            'disponivel' => false,
+            'estoqueDisponivel' => $produto->numberUnits
+        ]);
     }
 
     public function inactivate(Product $product)
