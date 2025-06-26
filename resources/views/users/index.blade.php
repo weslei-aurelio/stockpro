@@ -132,7 +132,7 @@
 @endsection
 
 @section('scripts')
-// preencher os inputs da modal editar usuário
+{{-- preencher os inputs da modal editar usuário --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
