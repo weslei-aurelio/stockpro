@@ -23,8 +23,8 @@
 
         <nav class="navbar">
             <div class="container-fluid">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2 navbar-brand" type="search" placeholder="Procurar" aria-label="Search"/>
+                <form action="/categories" class="d-flex" role="search" method="GET">
+                    <input class="form-control me-2 navbar-brand" type="search" name="search" placeholder="Procurar" aria-label="Search"/>
                     <button class="btn btn-primary" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-search" viewBox="0 0 16 16">
@@ -34,6 +34,16 @@
                         </svg>
                     </button>
                 </form>
+                <div class="col-md-12 mt-5">
+                    @if($search)
+                        <h3>Minha busca: {{ $search }}</a></h2>
+                    @endif
+                    @if(count($categories) == 0 && $search)
+                        <h3>Não foi possível encontrar nenhuma categoria com {{ $search }} <a href="/categories">Ver todas as categorias</a></h4>
+                    @elseif(count($categories) == 0)
+                        <h4>Não há categorias disponíveis</h4>
+                    @endif
+                </div>
             </div>
         </nav>
 
@@ -42,6 +52,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -50,6 +61,7 @@
                     <tr>
                         <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
+                        <td>Pendente</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown"
@@ -68,21 +80,27 @@
                                     <li>
                                         <a class="dropdown-item" href="#">Editar</a>
                                     </li>
-                                    <li>
-                                        <form action="#" method="POST">
+                                    @if ($category->status_id === \App\Models\Status::ATIVO)
+                                        <form action="{{ route('categories.inactivate', $category->id) }}" method="POST">
                                             @csrf
-                                            @method('DELETE')
+                                            @method('PUT')
                                             <button type="submit" class="dropdown-item text-danger">Inativar</button>
                                         </form>
-                                    </li>
+                                    @else
+                                        <form action="{{ route('categories.activate', $category->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="dropdown-item text-success">Ativar</button>
+                                        </form>
+                                @endif
+
                                 </ul>
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-
+    </table>
         <nav aria-label="Page navigation example" class="d-flex justify-content-center">
             <ul class="pagination">
                 <li class="page-item">
