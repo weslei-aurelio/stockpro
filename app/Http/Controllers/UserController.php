@@ -16,8 +16,9 @@ class UserController extends Controller
             ->orderBy('name')
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');
+                $query->orWhere('email', 'like', '%' . $keyword . '%');
             })
-            ->paginate(10);
+            ->simplePaginate(10);
 
         return view('users.index', compact('users'));
     }

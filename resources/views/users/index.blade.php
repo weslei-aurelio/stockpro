@@ -26,7 +26,7 @@
                         class="form-control me-2 navbar-brand" 
                         type="text" 
                         name="keyword"
-                        placeholder="Nome do usuário" 
+                        placeholder="Nome ou e-mail" 
                         aria-label="Search"
                     />
                     <button class="btn btn-primary" type="submit">
@@ -107,6 +107,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $users->links() }}
     </div>
    
     @include('users.partials.create')
