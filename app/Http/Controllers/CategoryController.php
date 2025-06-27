@@ -8,20 +8,8 @@ use App\Models\Status;
 
 class CategoryController extends Controller
 {
-//     public function index() 
-// {
-//     $search = request('search');
 
-//     if ($search) {
-//         $categories = Category::where('name', 'like', '%'.$search.'%')->get();
-//     } else {
-//         $categories = Category::all();
-//     }
-
-//     return view('categories.index', compact('categories', 'search'));
-// }
-
-public function index(Request $request)
+    public function index(Request $request)
     {
         $categories = Category::query()
             ->orderBy('status_id')
@@ -29,7 +17,7 @@ public function index(Request $request)
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');
             })
-            ->paginate(10);
+            ->simplePaginate(10);
         return view('categories.index', compact('categories'));
     }
 
