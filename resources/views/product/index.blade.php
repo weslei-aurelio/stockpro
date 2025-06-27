@@ -86,18 +86,17 @@
                                     </button>
                                 </li>
                                 <li>
-                                    @if ($product->status_id === \App\Models\Status::ATIVO)
-                                        <form action="{{ route('products.inactivate', $product->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="dropdown-item text-danger">Inativar</button>
-                                        </form>
+                                    @if ($product->status_id == 1)
+                                    <form action="{{ route('products.inactivate', $product->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                    </form>
                                     @else
-                                        <form action="{{ route('products.activate', $product->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="dropdown-item text-success">Ativar</button>
-                                        </form>
+                                    <form action="{{ route('products.activate', $product->id )}}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                    </form>
                                     @endif
                                 </li>
                             </ul>

@@ -34,23 +34,12 @@
                         </svg>
                     </button>
                 </form>
-                <div class="col-md-12 mt-5">
-                    @if($search)
-                        <h3>Minha busca: {{ $search }}</a></h2>
-                    @endif
-                    @if(count($categories) == 0 && $search)
-                        <h3>Não foi possível encontrar nenhuma categoria com {{ $search }} <a href="/categories">Ver todas as categorias</a></h4>
-                    @elseif(count($categories) == 0)
-                        <h4>Não há categorias disponíveis</h4>
-                    @endif
-                </div>
             </div>
         </nav>
 
         <table class="table table-hover table-striped">
             <thead class="table-primary">
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
@@ -59,7 +48,6 @@
             <tbody>
                 @foreach ($categories as $category)
                     <tr>
-                        <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->status->name ?? 'Sem status' }}</td>
                         <td>
@@ -80,20 +68,18 @@
                                     <li>
                                         <a class="dropdown-item" href="#">Editar</a>
                                     </li>
-                                    @if ($category->status_id === \App\Models\Status::ATIVO)
-                                        <form action="{{ route('categories.inactivate', $category->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="dropdown-item text-danger">Inativar</button>
-                                        </form>
+                                    @if ($category->status_id == 1)
+                                    <form action="{{ route('categories.inactivate', $category->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                    </form>
                                     @else
-                                        <form action="{{ route('categories.activate', $category->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="dropdown-item text-success">Ativar</button>
-                                        </form>
-                                @endif
-
+                                    <form action="{{ route('categories.activate', $category->id )}}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                    </form>
+                                    @endif
                                 </ul>
                             </div>
                         </td>

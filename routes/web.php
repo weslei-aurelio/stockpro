@@ -33,8 +33,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('categories',         [CategoryController::class, 'index'])->name('categories.index');
     Route::get('categories/create',  [CategoryController::class, 'create'])->name('categories.create');
     Route::post('categories/create', [CategoryController::class, 'store'])->name('categories.store');
-    Route::put('/categories/{category}/inactivate', [CategoryController::class, 'inactivate'])->name('categories.inactivate');
-    Route::put('/categories/{category}/activate', [CategoryController::class, 'activate'])->name('categories.activate');
+    Route::delete('/categories/{category}/inactivate', [CategoryController::class, 'inactivate'])->name('categories.inactivate');
+    Route::post('/categories/{category}/activate', [CategoryController::class, 'activate'])->name('categories.activate');
 
     Route::get('/products',                 [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create',          [ProductController::class, 'create'])->name('products.create');
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/products/create',         [ProductController::class, 'store'])->name('products.store');
     Route::get('/search-products',          [ProductController::class, 'search']);
     Route::put('/products/{product}/inactivate', [ProductController::class, 'inactivate'])->name('products.inactivate');
-    Route::put('/products/{product}/activate', [ProductController::class, 'activate'])->name('products.activate');
+    Route::post('/products/{product}/activate', [ProductController::class, 'activate'])->name('products.activate');
     
     Route::get('/pdv',                   [PdvController::class, 'index'])->name('pdv.index');
     Route::post('/sales',                [PdvController::class, 'storeSale'])->name('pdv.storeSale');
