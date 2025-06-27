@@ -61,7 +61,7 @@
                     <tr>
                         <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
-                        <td>Pendente</td>
+                        <td>{{ $category->status->name ?? 'Sem status' }}</td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown"
