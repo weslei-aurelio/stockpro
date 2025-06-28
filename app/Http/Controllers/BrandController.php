@@ -16,7 +16,8 @@ class BrandController extends Controller
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');
             })
-            ->paginate(10);
+            ->simplePaginate(10);
+
         return view('brands.index', compact('brands'));
     }
 
