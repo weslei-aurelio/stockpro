@@ -1,7 +1,7 @@
 <?php
 
-if(!function_exists('formatToDecimal')) {
-
+if(!function_exists('formatToDecimal')) 
+{
     function formatToDecimal($valor) {
     
         if (!$valor) return null;
@@ -13,4 +13,13 @@ if(!function_exists('formatToDecimal')) {
 function money_mask($amount)
 {
     return (number_format($amount, 2, ',', '') !== null ? number_format($amount, 2, ',', '.') : '');
+}
+
+
+if (!function_exists('formatDate')) 
+{
+    function formatDate($date, $format = 'd/m/Y H:i')
+    {
+        return \Carbon\Carbon::parse($date)->format($format);
+    }
 }

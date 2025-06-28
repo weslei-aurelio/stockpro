@@ -23,7 +23,7 @@
             <tbody>
                 @foreach ($itens as $item)
                     <tr>
-                    <th>{{ $item->sale->sale_date }}</th>
+                    <td>{{ formatDate($item->sale->sale_date) }}</td>
                     <td>{{ $item->product->description }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>{{ $item->product->purchaseValue }}</td>
@@ -41,6 +41,7 @@
                     </tr>
                 </tfoot>
             </table>
+            {{ $itens->links() }}
         </div>
     </div>
 @endsection

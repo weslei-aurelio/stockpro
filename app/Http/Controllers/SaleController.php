@@ -9,11 +9,13 @@ class SaleController extends Controller
 {
     public function movementReport (Request $request)
     {
+        // Paginação dos itens
         $itens = SaleItem::with(['product', 'sale'])
                     ->orderBy('sale_id')
-                    ->get();
+                    ->simplePaginate(10);
 
-        $totalLucro = $itens->sum(function ($item) {
+        // Cálculo total, separado da paginação (considera todos registros)
+        $totalLucro = SaleItem::with('product')->get()->sum(function ($item) {
             $lucroPorUnidade = $item->unit_value - $item->product->purchaseValue;
             return $lucroPorUnidade * $item->quantity;
         });
