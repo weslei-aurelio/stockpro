@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Status;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -20,6 +21,26 @@ class CategoryController extends Controller
             ->simplePaginate(10);
         return view('categories.index', compact('categories'));
     }
+
+    public function update(Request $request, $id)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return back()
+            ->withErrors($validator, 'edit')
+            ->withInput();
+    }
+
+    $category = Category::findOrFail($id);
+    $category->name = $request->name;
+    $category->save();
+
+    return redirect()->route('categories.index')->with('success', 'Categoria editada com sucesso!');
+}
+
 
     public function create()
     {

@@ -62,7 +62,11 @@
                 @foreach ($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->status->name ?? 'Sem status' }}</td>
+                        @if($category->status_id == 1)
+                            <td class="text-success">{{ $category->status->name }}</td>
+                        @else
+                            <td class="text-danger">{{ $category->status->name }}</td>
+                        @endif
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown"
@@ -79,7 +83,14 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
                                     <li>
-                                        <a class="dropdown-item" href="#">Editar</a>
+                                        <button type="button" 
+                                            class="dropdown-item"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#EditCategories"
+                                            data-categories-id="{{ $category->id }}"
+                                            data-categories-name="{{ $category->name }}">
+                                            Editar
+                                        </button>
                                     </li>
                                     @if ($category->status_id == 1)
                                     <form action="{{ route('categories.inactivate', $category->id) }}" method="POST" class="d-inline">
@@ -104,5 +115,32 @@
     </div>
 
     @include('categories.partials.create')
+    @include('categories.partials.edit')
     @include('layouts.components.alert')
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('EditCategories');
+
+    if (modal) {
+        modal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+
+            const name = button.getAttribute('data-categories-name');
+            const id = button.getAttribute('data-categories-id');
+
+            // Preenche os inputs da modal
+            document.getElementById('editName').value = name;
+            document.getElementById('categoriesID').value = id;
+
+            // Atualiza a action do form
+            const form = document.getElementById('editCategoriesForm');
+            form.action = form.action.replace('__ID__', id);
+        });
+    }
+});
+</script>
+@endsection
+
 @endsection
