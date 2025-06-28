@@ -10,8 +10,8 @@
         <h1>Relatório de movimentação</h1>
         <div class="container mt-4">
             <table class="table table-bordered table-striped table-hover">
-            <thead class="table-primary">
-                <tr>
+            <thead class="table-primary ">
+                <tr class="text-center">
                     <th scope="col">Data de venda</th>
                     <th scope="col">Produto</th>
                     <th scope="col">Quantidade</th>
@@ -26,8 +26,8 @@
                     <td>{{ formatDate($item->sale->sale_date) }}</td>
                     <td>{{ $item->product->description }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>{{ $item->product->purchaseValue }}</td>
-                    <td>{{ $item->unit_value }}</td>
+                    <td>R$ {{ money_mask($item->product->purchaseValue) }}</td>
+                    <td>R$ {{ money_mask($item->unit_value) }}</td>
                     <td>
                         R$ {{ number_format(($item->unit_value - $item->product->purchaseValue) * $item->quantity, 2, ',', '.') }}
                     </td>
