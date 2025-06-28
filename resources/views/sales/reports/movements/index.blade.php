@@ -3,12 +3,15 @@
 @section('title', 'Relatório de Movimentação | StockPRO')
 
 @section('content')
-<div class="container my-3">
-    <x-date-range-filter action="/movement-report" />
-</div>
     <div class="container mt-4">
-        <h1>Relatório de movimentação</h1>
-        <div class="container mt-4">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <h1 class="m-0">Relatório de movimentação</h1>
+            </div>
+            <div class="col-md-3 offset-md-3">
+                <input type="text" id="periodo" class="date-picker form-control" placeholder="Período">
+            </div>
+        </div>
             <table class="table table-bordered table-striped table-hover">
             <thead class="table-primary ">
                 <tr class="text-center">
@@ -42,6 +45,5 @@
                 </tfoot>
             </table>
             {{ $itens->links() }}
-        </div>
     </div>
 @endsection

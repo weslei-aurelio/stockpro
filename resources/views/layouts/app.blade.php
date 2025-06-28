@@ -11,13 +11,15 @@
         <title>@yield('title')</title>
     </head>
     <body class="d-flex flex-column min-vh-100">
+
         <!-- Inserção CSRF Token para requisições http utilizando AJAX formulário pdv -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
         @include('layouts.components.header')
         <main class="flex-grow-1">
             @yield('content')
         </main>
-        @include('layouts.components.footer')
+
         @stack('index-css')
         @stack('products-css')
         @stack('header-css')
@@ -28,11 +30,11 @@
         @stack('brands-css')
         @stack('categories-css')
         @stack('suppliers-css')
-        
-        <!-- Scripts JS no final -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        @yield('scripts')
-        <!-- Realizando import do Bootstrap -->
+
+        <!-- Scripts do Vite (já carrega jQuery, Bootstrap, Flatpickr) -->
         @vite('resources/js/main.js')
+
+        @stack('scripts')
+        @yield('scripts')
     </body>
 </html>
