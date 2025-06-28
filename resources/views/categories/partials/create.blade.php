@@ -18,7 +18,7 @@
                             placeholder="Categoria"
                         >
                         <label class="floatingInput">Categoria</label>
-                        @error('name')
+                        @error('name', 'create')
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>

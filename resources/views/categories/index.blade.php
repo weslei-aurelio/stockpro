@@ -101,7 +101,7 @@
                                     @else
                                     <form action="{{ route('categories.activate', $category->id )}}" method="POST" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                        <button type="submit" class="dropdown-item text-success">Ativar</button>
                                     </form>
                                     @endif
                                 </ul>
@@ -119,6 +119,34 @@
     @include('layouts.components.alert')
 
 @section('scripts')
+
+    @if ($errors->create->any())
+        <script>
+            window.onload = function() {
+                var newUserModal = new bootstrap.Modal(document.getElementById('NewCategories'));
+                newUserModal.show();
+            }
+        </script>
+    @endif
+
+    @if ($errors->edit->any())
+<script>
+    window.onload = function() {
+        var editModal = new bootstrap.Modal(document.getElementById('EditCategories'));
+
+        document.getElementById('editName').value = "{{ old('name') }}";
+        document.getElementById('categoriesID').value = "{{ old('id') }}";
+
+        const form = document.getElementById('editCategoriesForm');
+        form.action = form.action.replace('__ID__', "{{ old('id') }}");
+
+        editModal.show();
+    };
+</script>
+@endif
+
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('EditCategories');

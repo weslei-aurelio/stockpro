@@ -25,8 +25,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
 {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-    ]);
+    'name' => 'required|string|max:255',
+], [
+    'name.required' => 'O campo categoria é obrigatório.',
+]);
+
 
     if ($validator->fails()) {
         return back()
@@ -47,21 +50,29 @@ class CategoryController extends Controller
         return view('categories.create');
     }
 
-    public function store(Request $request) 
-    {   
-        $input = $request->validate([
-            'name' => 'required|string'
-        ]);
+    public function store(Request $request)
+    {
+        $category = new Category();
 
-        Category::create($input);
+       $validator = Validator::make($request->all(), [
+        'name' => 'required|string',
+    ], [
+        'name.required' => 'O campo categoria é obrigatório.',
+    ]);
 
-        request()->session()->flash('success', 'Categoria Cadastrada com Sucesso');
 
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'create')
+                ->withInput();
+        }
+
+        $category->name      = $request->name;
+        $category->status_id = Status::ATIVO;
+        $category->save();
+
+        request()->session()->flash('success', 'Categoria Cadastrada com sucesso');
         return redirect()->route('categories.index');
-
-        // return redirect()
-        //     ->route('categories.index')
-        //     ->with('status', 'Categoria cadastrada com sucesso!');
     }
 
   public function inactivate(Category $category)
