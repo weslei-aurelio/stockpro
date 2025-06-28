@@ -37,13 +37,21 @@ class BrandController extends Controller
 
     }
 
-    public function inactivate() 
-    {
+    public function inactivate(Brand $brand)
+{
+    $brand->status_id = Status::SUSPENSO;
+    $brand->save();
 
-    }
+    request()->session()->flash('success', 'Marca inativada com sucesso!');
+    return redirect()->route('brands.index');
+}
 
-    public function activate() 
-    {
+public function activate(Category $brand)
+{
+    $brand->status_id = Status::ATIVO;
+    $brand->save();
 
-    }
+    request()->session()->flash('success', 'Marca ativada com sucesso!');
+    return redirect()->route('brands.index');
+}
 }

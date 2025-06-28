@@ -38,6 +38,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Marca</th>
+                <th scope="col">Status</th>
                 <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -46,6 +47,7 @@
                 <tr>
                     <th scope="row">{{ $brand->id }}</th>
                     <td>{{ $brand->name }}</td>
+                    <td>{{ $brand->status->name }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
