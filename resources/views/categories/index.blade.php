@@ -23,7 +23,7 @@
 
         <nav class="navbar">
             <div class="container-fluid">
-                <form action="/categories" class="d-flex" role="search" method="GET">
+                <form action="{{ route('categories.index') }}" class="d-flex" role="search" method="GET">
                     <input class="form-control me-2 navbar-brand" 
                         type="text" 
                         name="keyword" 
@@ -39,7 +39,7 @@
                         </svg>
                     </button>
                     @if(request('keyword'))
-                        <a href="/categories" class="btn btn-danger">
+                        <a href="{{ route('categories.index') }}" class="btn btn-danger">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
                                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
@@ -119,7 +119,6 @@
     @include('layouts.components.alert')
 
 @section('scripts')
-
     @if ($errors->create->any())
         <script>
             window.onload = function() {
@@ -128,7 +127,6 @@
             }
         </script>
     @endif
-
     @if ($errors->edit->any())
 <script>
     window.onload = function() {
@@ -144,8 +142,6 @@
     };
 </script>
 @endif
-
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {

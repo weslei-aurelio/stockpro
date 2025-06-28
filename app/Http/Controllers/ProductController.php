@@ -23,7 +23,7 @@ class ProductController extends Controller
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('description', 'like', '%' . $keyword . '%');
             })
-            ->paginate(10);
+            ->simplePaginate(10);
 
         return view('product.index', compact('brands', 'categories', 'products'));
     }
