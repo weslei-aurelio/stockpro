@@ -25,8 +25,10 @@ class BrandController extends Controller
     public function update(Request $request, $id)
 {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-    ]);
+    'name' => 'required|string|max:255',
+], [
+    'name.required' => 'O campo marca é obrigatório.',
+]);
 
     if ($validator->fails()) {
         return back()
@@ -46,22 +48,29 @@ class BrandController extends Controller
         return view('brands.create');
     }
 
-    public function store (Request $request) 
+    public function store(Request $request)
     {
-        $input = $request->validate([
-            'name' => 'required|string'
-        ]);
+        $brand = new Brand();
 
-        Brand::create($input);
+       $validator = Validator::make($request->all(), [
+        'name' => 'required|string',
+    ], [
+        'name.required' => 'O campo marca é obrigatório.',
+    ]);
 
-        request()->session()->flash('success', 'Marca Cadastrada com Sucesso');
 
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator, 'create')
+                ->withInput();
+        }
+
+        $brand->name      = $request->name;
+        $brand->status_id = Status::ATIVO;
+        $brand->save();
+
+        request()->session()->flash('success', 'Marca Cadastrada com sucesso');
         return redirect()->route('brands.index');
-
-        // return redirect()
-        //     ->route('brands.index')
-        //     ->with('status', 'Marca cadastrada com sucesso!');
-
     }
 
     public function inactivate(Brand $brand)

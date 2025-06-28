@@ -72,14 +72,16 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
                                 <li>
-                                        <button type="button" 
-                                            class="dropdown-item"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#EditBrands"
-                                            data-categories-id="{{ $brand->id }}"
-                                            data-categories-name="{{ $brand->name }}">
-                                                Editar
-                                        </button>
+                                    <button
+                                        type="button"
+                                        class="dropdown-item"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#EditBrands"
+                                        data-brands-id="{{ $brand->id }}"
+                                        data-brands-name="{{ $brand->name }}">
+                                            Editar
+                                    </button>
+
                                     </li>
                                 @if ($brand->status_id == 1)
                                     <form action="{{ route('brands.inactivate', $brand->id) }}" method="POST" class="d-inline">
@@ -107,6 +109,32 @@
     @include('layouts.components.alert')
     
 @section('scripts')
+
+@if ($errors->create->any())
+    <script>
+        window.onload = function() {
+            var newUserModal = new bootstrap.Modal(document.getElementById('NewBrand'));
+            newUserModal.show();
+        }
+    </script>
+@endif
+
+@if ($errors->edit->any())
+<script>
+    window.onload = function() {
+        var editModal = new bootstrap.Modal(document.getElementById('EditBrands'));
+
+        document.getElementById('editName').value = "{{ old('name') }}";
+        document.getElementById('brandsID').value = "{{ old('id') }}";
+
+        const form = document.getElementById('editBrandsForm');
+        form.action = form.action.replace('__ID__', "{{ old('id') }}");
+
+        editModal.show();
+    };
+</script>
+@endif
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('EditBrands');

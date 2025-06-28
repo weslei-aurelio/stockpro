@@ -18,7 +18,7 @@
                             placeholder="Marca"
                         >
                         <label class="floatingInput">Marca</label>
-                        @error('name')
+                        @error('name', 'create')
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
