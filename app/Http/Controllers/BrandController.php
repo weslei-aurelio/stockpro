@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Brand;
+use App\Models\Status;
 
 class BrandController extends Controller
 {
-    public function index () 
+    public function index(Request $request)
     {
-        $brands = Brand::all();
-
+        $brands = Brand::query()
+            ->orderBy('status_id')
+            ->orderBy('name')
+            ->when($request->keyword, function ($query, $keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%');
+            })
+            ->paginate(10);
         return view('brands.index', compact('brands'));
     }
 

@@ -36,7 +36,6 @@
     <table class="table table-hover table-striped">
         <thead class=table-primary>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Status</th>
                 <th scope="col">Ação</th>
@@ -45,7 +44,6 @@
         <tbody>
             @foreach ($brands as $brand)
                 <tr>
-                    <th scope="row">{{ $brand->id }}</th>
                     <td>{{ $brand->name }}</td>
                     <td>{{ $brand->status->name }}</td>
                     <td>
@@ -57,13 +55,18 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
                                 <li><a class="dropdown-item" href="#">Editar</a></li>
-                                <li>
-                                    <form action="#" method="POST">
+                                @if ($brand->status_id == 1)
+                                    <form action="{{ route('brands.inactivate', $brand->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item text-danger">Inativar</button>
                                     </form>
-                                </li>
+                                    @else
+                                    <form action="{{ route('brands.activate', $brand->id )}}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                    </form>
+                                    @endif
                             </ul>
                         </div>
                     </td>
