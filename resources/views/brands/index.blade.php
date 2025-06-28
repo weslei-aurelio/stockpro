@@ -58,7 +58,11 @@
             @foreach ($brands as $brand)
                 <tr>
                     <td>{{ $brand->name }}</td>
-                    <td>{{ $brand->status->name }}</td>
+                    @if($brand->status_id == 1)
+                        <td class="text-success">{{ $brand->status->name }}</td>
+                    @else
+                        <td class="text-danger">{{ $brand->status->name }}</td>
+                    @endif
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -67,7 +71,16 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
-                                <li><a class="dropdown-item" href="#">Editar</a></li>
+                                <li>
+                                        <button type="button" 
+                                            class="dropdown-item"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#EditBrands"
+                                            data-categories-id="{{ $brand->id }}"
+                                            data-categories-name="{{ $brand->name }}">
+                                                Editar
+                                        </button>
+                                    </li>
                                 @if ($brand->status_id == 1)
                                     <form action="{{ route('brands.inactivate', $brand->id) }}" method="POST" class="d-inline">
                                         @csrf
@@ -77,7 +90,7 @@
                                     @else
                                     <form action="{{ route('brands.activate', $brand->id )}}" method="POST" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">Ativar</button>
+                                        <button type="submit" class="dropdown-item text-success">Ativar</button>
                                     </form>
                                     @endif
                             </ul>
@@ -90,5 +103,32 @@
         {{ $brands->links() }}
 </div>
     @include('brands.partials.create')
-    @include('layouts.components.alert')    
+    @include('brands.partials.edit')
+    @include('layouts.components.alert')
+    
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('EditBrands');
+
+    if (modal) {
+        modal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+
+            const name = button.getAttribute('data-brands-name');
+            const id = button.getAttribute('data-brands-id');
+
+            // Preenche os inputs da modal
+            document.getElementById('editName').value = name;
+            document.getElementById('brandsID').value = id;
+
+            // Atualiza a action do form
+            const form = document.getElementById('editBrandsForm');
+            form.action = form.action.replace('__ID__', id);
+        });
+    }
+});
+</script>
+@endsection
+
 @endsection

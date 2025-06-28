@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Brand;
 use App\Models\Status;
+use Illuminate\Support\Facades\Validator;
 
 class BrandController extends Controller
 {
@@ -20,6 +21,25 @@ class BrandController extends Controller
 
         return view('brands.index', compact('brands'));
     }
+
+    public function update(Request $request, $id)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return back()
+            ->withErrors($validator, 'edit')
+            ->withInput();
+    }
+
+    $brand = Brand::findOrFail($id);
+    $brand->name = $request->name;
+    $brand->save();
+
+    return redirect()->route('brands.index')->with('success', 'Marca editada com sucesso!');
+}
 
     public function create ()
     {   
@@ -53,7 +73,7 @@ class BrandController extends Controller
     return redirect()->route('brands.index');
 }
 
-public function activate(Category $brand)
+public function activate(Brand $brand)
 {
     $brand->status_id = Status::ATIVO;
     $brand->save();
