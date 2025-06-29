@@ -9,7 +9,9 @@
                 <h1 class="m-0">Relatório de movimentação</h1>
             </div>
             <div class="col-md-3 offset-md-3">
-                <input type="text" id="periodo" class="date-picker form-control" placeholder="Período">
+                <form id="form-search" action="{{ route('movementReport.index') }}" method="GET">
+                    <input type="text" id="periodo" name="periodo" class="date-picker form-control" placeholder="Período">
+                </form>
             </div>
         </div>
             <table class="table table-bordered table-striped table-hover">
@@ -44,6 +46,7 @@
                     </tr>
                 </tfoot>
             </table>
-            {{ $itens->links() }}
+        {{ $itens->links() }}
     </div>
+    @include('layouts.components.alert')
 @endsection

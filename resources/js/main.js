@@ -13,7 +13,6 @@ import $ from 'jquery'
 window.$ = window.jQuery = $;
 
 
-
 $(function () {
     $('.money').mask('000.000.000.000.000,00', { reverse: true });
     $('.cpf').mask('000.000.000-00');
@@ -44,11 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 $(function(){
-    console.log('oi');
     flatpickr("#periodo", {
         mode: "range",
         locale: "pt",
         dateFormat: "d/m/Y",
+        onValueUpdate: function(selectedDates, inputValue, flatpickrInstance, dayElem){
+            if(selectedDates.length > 1){
+                $('#form-search').trigger('submit');
+            }
+        },
     });
 });
 

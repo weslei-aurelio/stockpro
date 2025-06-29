@@ -33,7 +33,7 @@
 
         <!-- Scripts do Vite (já carrega jQuery, Bootstrap, Flatpickr) -->
         @vite('resources/js/main.js')
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         @stack('scripts')
         @yield('scripts')
     </body>
