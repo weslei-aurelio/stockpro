@@ -27,19 +27,23 @@ class SupplierController extends Controller
     }
 
     public function store(Request $request) 
-    {
-        $data = $request->validate([
-            'name'        => 'required|string',
-            'email'       => 'required|string|email',
-            'phone'       => 'required|string',
-            'observation' => 'nullable|string'
-        ]);
+{
+    $data = $request->validate([
+        'name'        => 'required|string',
+        'email'       => 'required|string|email',
+        'phone'       => 'required|string',
+        'observation' => 'nullable|string',
+    ]);
 
-        Supplier::create($data);
+    // Define status_id = 1 (Ativo)
+    $data['status_id'] = 1;
 
-        request()->session()->flash('success', 'Fornecedor cadastrado com sucesso');
-        return redirect()->route('suppliers.index');
-    }
+    Supplier::create($data);
+
+    request()->session()->flash('success', 'Fornecedor cadastrado com sucesso');
+    return redirect()->route('suppliers.index');
+}
+
 
     public function inactivate(Supplier $suppliers)
 {

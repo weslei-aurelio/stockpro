@@ -105,6 +105,7 @@
                 @endforeach
             </tbody>
         </table>
+            {{ $suppliers->links() }}
     </div>
 
 @include('suppliers.partials.create')
