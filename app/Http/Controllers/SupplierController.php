@@ -10,16 +10,20 @@ use Illuminate\Support\Facades\Validator;
 class SupplierController extends Controller
 {
    public function index(Request $request)
-    {
-        $suppliers = Supplier::query()
-            ->orderBy('status_id')
-            ->orderBy('name')
-            ->when($request->keyword, function ($query, $keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            })
-            ->simplePaginate(10);
-        return view('suppliers.index', compact('suppliers'));
-    }
+{
+    $keyword = $request->keyword;
+
+    $suppliers = Supplier::with('status')
+        ->orderBy('status_id')
+        ->orderBy('name')
+        ->when($keyword, function ($query, $keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->simplePaginate(10);
+
+    return view('suppliers.index', compact('suppliers', 'keyword'));
+}
+
 
     public function crate() 
     {
