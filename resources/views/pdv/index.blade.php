@@ -130,6 +130,11 @@
                 return;
             }
 
+            if (quantity === "" || quantity === null || isNaN(quantity) || parseInt(quantity) <= 0) {
+                alert("Informe uma quantidade válida maior que zero.");
+                return;
+            }
+
              // Faz a verificação de estoque antes de adicionar
             $.ajax({
                 url: `/check-stock/${id}`,
