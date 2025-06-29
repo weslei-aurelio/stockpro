@@ -11,22 +11,24 @@ use App\Models\Status;
 
 class ProductController extends Controller
 {
-    public function index (Request $request)
-    {
-        $products   = Product::query();
-        $brands     = Brand::all();
-        $categories = Category::all();
+    public function index(Request $request)
+{
+    $brands     = Brand::all();
+    $categories = Category::all();
 
-        $products = Product::with('category')
-            ->orderBy('status_id')
-            ->orderBy('category_id')
-            ->when($request->keyword, function ($query, $keyword) {
-                $query->where('description', 'like', '%' . $keyword . '%');
-            })
-            ->simplePaginate(10);
+    $products = Product::with('category')
+        ->orderBy('status_id')
+        ->orderBy('category_id')
+        ->when($request->keyword, function ($query, $keyword) {
+            $query->where('description', 'like', '%' . $keyword . '%');
+        })
+        ->simplePaginate(10);
 
-        return view('product.index', compact('brands', 'categories', 'products'));
-    }
+    $keyword = $request->keyword; 
+
+    return view('product.index', compact('brands', 'categories', 'products', 'keyword'));
+}
+
 
     public function create () 
     {

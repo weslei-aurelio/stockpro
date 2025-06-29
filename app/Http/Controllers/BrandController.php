@@ -10,17 +10,20 @@ use Illuminate\Support\Facades\Validator;
 class BrandController extends Controller
 {
     public function index(Request $request)
-    {
-        $brands = Brand::query()
-            ->orderBy('status_id')
-            ->orderBy('name')
-            ->when($request->keyword, function ($query, $keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
-            })
-            ->simplePaginate(10);
+{
+    $keyword = $request->keyword;
 
-        return view('brands.index', compact('brands'));
-    }
+    $brands = Brand::query()
+        ->orderBy('status_id')
+        ->orderBy('name')
+        ->when($keyword, function ($query, $keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->simplePaginate(10);
+
+    return view('brands.index', compact('brands', 'keyword'));
+}
+
 
     public function update(Request $request, $id)
 {

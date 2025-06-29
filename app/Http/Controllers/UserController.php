@@ -19,7 +19,9 @@ class UserController extends Controller
             })
             ->paginate(10);
 
-        return view('users.index', compact('users'));
+            $keyword = $request->keyword; 
+
+        return view('users.index', compact('users', 'keyword'));
     }
 
     public function update (User $user, Request $request)
