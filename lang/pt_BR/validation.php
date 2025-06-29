@@ -280,4 +280,15 @@ return [
         'work'                     => 'trabalho',
         'year'                     => 'ano',
     ],
+
+    'attributes' => [
+        'description'   => 'descrição',
+        'name'          => 'nome',
+        'email'         => 'e-mail',
+        'purchaseValue' => 'valor de compra',
+        'profitMargin'  => 'lucro desejado (%)',
+        'salePrice'     => 'valor de venda',
+        'numberUnits'   => 'quantidade de unidades',
+        'password'      => 'senha'
+    ],
 ];
