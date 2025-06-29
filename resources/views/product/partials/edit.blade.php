@@ -10,31 +10,41 @@
                 <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('products.update', ['product' => '__ID__'])  }}" method="POST" id="editProductForm"> 
+                <form action="{{ url('/products/__ID__/edit') }}" method="POST" id="editProductForm"> 
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
+                        <input type="hidden" name="id" value="{{ old('id') }}" id="productID">
                         <label for="brands">
                             Descrição
                         </label>
                         <input
                             type="text"
                             name="description"
-                            class="form-control"
+                            class="form-control @error('description', 'edit') is-invalid @enderror"
                             value="{{ old('description') }}"
                             placeholder="Ex: Cerveja Amstel 350ml"
                             id="EditDescription"
                         >
+                        @error('description', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="brand" class="form-label">Marca</label>
                         <div class="d-flex align-items-center gap-2">
-                            <select class="form-select" name="brand_id" id="editBrand">
+                            <select class="form-select @error('brand_id', 'edit') is-invalid @enderror" name="brand_id" id="editBrand">
                                 <option selected>Selecione</option>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}"> {{$brand->name}} </option>
+                                    <option
+                                        value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}> 
+                                        {{$brand->name}} 
+                                    </option>
                                 @endforeach
                             </select>
-                            <a href="{{ route('brands.create') }}">
+                            <a href="{{ route('brands.index') }}">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
                                     width="20" 
@@ -47,14 +57,21 @@
                                 </svg>
                             </a>
                         </div>
+                        @error('brand_id', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="categories" class="form-label">Tipo</label>
                         <div class="d-flex align-items-center gap-2">
-                            <select class="form-select" name="category_id" id="editCategory">
+                            <select class="form-select @error('category_id', 'edit') is-invalid @enderror" name="category_id" id="editCategory">
                                 <option selected>Selecione</option>
                                 @foreach ($categories as $category)
-                                       <option value="{{ $category->id }}"> {{$category->name}} </option>
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}> 
+                                        {{$category->name}} 
+                                    </option>
                                 @endforeach
                             </select>       
                             <a href="{{ route('categories.create') }}">
@@ -70,6 +87,11 @@
                                 </svg>
                             </a> 
                         </div>
+                        @error('brand_id', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="purchaseValue">
@@ -79,10 +101,15 @@
                             id="editPurchaseValue"
                             type="text"
                             name="purchaseValue"
-                            class="form-control money"
+                            class="form-control money @error('purchaseValue', 'edit') is-invalid @enderror"
                             value="{{ old('purchaseValue') }}"
                             placeholder="0,00"
                         >
+                        @error('purchaseValue', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="salePrice">
@@ -92,10 +119,15 @@
                             id="editSalePrice"
                             type="text"
                             name="salePrice"
-                            class="form-control money"
+                            class="form-control money money @error('salePrice', 'edit') is-invalid @enderror"
                             value="{{ old('salePrice') }}"
                             placeholder="0,00"
                         >
+                        @error('salePrice', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="profitMargin">
@@ -105,10 +137,15 @@
                             id="editProfitMargin"
                             type="text"
                             name="profitMargin"
-                            class="form-control percent"
+                            class="form-control percent @error('profitMargin', 'edit') is-invalid @enderror"
                             value="{{ old('profitMargin') }}"
                             placeholder="Ex: 25,00"
                         >
+                        @error('profitMargin', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="numberUnits">
@@ -118,13 +155,18 @@
                             id="editNumberUnits"
                             type="number"
                             name="numberUnits"
-                            class="form-control"
+                            class="form-control @error('numberUnits', 'edit') is-invalid @enderror"
                             value="{{ old('numberUnits') }}"
                             placeholder="Ex: 200"
                         >
+                        @error('numberUnits', 'edit')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="modal-footer">
-                        <a href="/products" class="text-decoration-none text-dark">Cancelar</a>
+                        <a href="{{ route('products.index') }}" class="text-decoration-none text-dark">Cancelar</a>
                         <button type="submit" class="btn btn-primary text-white custom-button-create">Salvar</button>
                     </div>
                 </form>

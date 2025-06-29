@@ -35,7 +35,7 @@
                                 <select class="form-select @error('brand_id', 'create') is-invalid @enderror" name="brand_id" id="brand">
                                 <option selected>Selecione</option>
                                 @foreach ($brands as $brand)
-                                      <option
+                                    <option
                                         value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}> 
                                         {{$brand->name}} 
                                     </option>
@@ -60,8 +60,9 @@
                             <select class="form-select @error('category_id', 'create') is-invalid @enderror" name="category_id" id="category">
                                 <option selected>Selecione</option>
                                 @foreach ($categories as $category)
-                                       <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}> 
-                                        {{$category->name}} </option>
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}> 
+                                        {{$category->name}} 
+                                    </option>
                                 @endforeach
                             </select>
                             <a href="{{ route('categories.index') }}">

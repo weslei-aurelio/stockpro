@@ -42,11 +42,11 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/products',                 [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create',          [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products/{product}/edit', [ProductController::class, 'update'])->name('products.update');
+    Route::put('/products/{product}/edit',  [ProductController::class, 'update'])->name('products.update');
     Route::post('/products/create',         [ProductController::class, 'store'])->name('products.store');
     Route::get('/search-products',          [ProductController::class, 'search']);
-    Route::put('/products/{product}/inactivate', [ProductController::class, 'inactivate'])->name('products.inactivate');
-    Route::put('/products/{product}/activate',   [ProductController::class, 'activate'])->name('products.activate');
+    Route::delete('/products/{product}/inactivate', [ProductController::class, 'inactivate'])->name('products.inactivate');
+    Route::post('/products/{product}/activate',[ProductController::class, 'activate'])->name('products.activate');
     Route::get('/check-stock/{id}',              [ProductController::class, 'checkStockQuantity']);
 
     Route::post('/products/{product}/activate', [ProductController::class, 'activate'])->name('products.activate');
