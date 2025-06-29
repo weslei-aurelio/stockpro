@@ -19,7 +19,10 @@ class CategoryController extends Controller
                 $query->where('name', 'like', '%' . $keyword . '%');
             })
             ->simplePaginate(10);
-        return view('categories.index', compact('categories'));
+
+            $keyword = $request->keyword; 
+            
+        return view('categories.index', compact('categories', 'keyword'));
     }
 
     public function update(Request $request, $id)

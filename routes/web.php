@@ -60,4 +60,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/suppliers',          [SupplierController::class, 'index'])->name('suppliers.index');
     Route::get('/suppliers/create',   [SupplierController::class, 'crate'])->name('suppliers.create');
     Route::post('/suppliers/create',  [SupplierController::class, 'store'])->name('suppliers.store');
+    Route::put('/suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
+    Route::delete('/suppliers/{suppliers}/inactivate', [SupplierController::class, 'inactivate'])->name('suppliers.inactivate');
+    Route::post('/suppliers/{suppliers}/activate', [SupplierController::class, 'activate'])->name('suppliers.activate');
 });
