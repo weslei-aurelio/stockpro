@@ -28,6 +28,7 @@
                     <th scope="col">E-mail</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Observações</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -38,6 +39,11 @@
                         <td>{{ $supplier->email }}</td>
                         <td>{{ $supplier->phone }}</td>
                         <td><a href="#">Ver observações</a></td>
+                        @if($supplier->status_id == 1)
+                            <td class="text-success">{{ $supplier->status->name }}</td>
+                        @else
+                            <td class="text-danger">{{ $supplier->status->name }}</td>
+                        @endif
                         <td>
                             <div class="btn-group dropup">
                         <button type="button" class="btn border-0 bg-transparent p-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -46,21 +52,21 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
-                            {{-- <li><a href="#" class="dropdown-item">Editar</a></li>
+                            <li><a href="#" class="dropdown-item">Editar</a></li>
                             <li>
-                                @if ($supplier)
-                                <form action="{{ url('users/' . $user->id . '/inactivate') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item text-danger">Inativar</button>
-                                </form>
+                                @if ($supplier->status_id == 1)
+                                    <form action="{{ route('suppliers.inactivate', $supplier->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="dropdown-item text-danger">Inativar</button>
+                                    </form>
                                 @else
-                                <form action="{{ url('users/' . $user->id . '/activate') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Ativar</button>
-                                </form>
+                                    <form action="{{ route('suppliers.activate', $supplier->id )}}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-success">Ativar</button>
+                                    </form>
                                 @endif
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                         </td>
