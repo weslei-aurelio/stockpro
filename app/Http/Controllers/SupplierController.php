@@ -30,7 +30,32 @@ class SupplierController extends Controller
         return view('suppliers.create');
     }
 
-    public function store(Request $request) 
+    public function update(Request $request, $id)
+{
+    $validator = Validator::make($request->all(), [
+        'name'  => 'required|string',
+        'email' => 'required|email',
+        'phone' => 'required|string',
+    ], [
+        'name.required'  => 'O campo nome é obrigatório.',
+        'email.required' => 'O campo e-mail é obrigatório.',
+        'phone.required' => 'O campo telefone é obrigatório.',
+    ]);
+
+    if ($validator->fails()) {
+        return back()
+            ->withErrors($validator, 'edit')
+            ->withInput();
+    }
+
+    $supplier = Supplier::findOrFail($id);
+    $supplier->update($request->only('name', 'email', 'phone', 'observation'));
+
+    return redirect()->route('suppliers.index')->with('success', 'Fornecedor atualizado com sucesso!');
+}
+
+
+     public function store(Request $request) 
 {
     $data = $request->validate([
         'name'        => 'required|string',
@@ -39,7 +64,6 @@ class SupplierController extends Controller
         'observation' => 'nullable|string',
     ]);
 
-    // Define status_id = 1 (Ativo)
     $data['status_id'] = 1;
 
     Supplier::create($data);
@@ -47,7 +71,6 @@ class SupplierController extends Controller
     request()->session()->flash('success', 'Fornecedor cadastrado com sucesso');
     return redirect()->route('suppliers.index');
 }
-
 
     public function inactivate(Supplier $suppliers)
 {

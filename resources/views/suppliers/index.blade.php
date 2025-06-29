@@ -104,7 +104,19 @@
                             </svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start bg-info">
-                            <li><a href="#" class="dropdown-item">Editar</a></li>
+                            <li>
+                                <button type="button"
+                                    class="dropdown-item"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#EditSuppliers"
+                                    data-supplier-id="{{ $supplier->id }}"
+                                    data-supplier-name="{{ $supplier->name }}"
+                                    data-supplier-email="{{ $supplier->email }}"
+                                    data-supplier-phone="{{ $supplier->phone }}"
+                                    data-supplier-observation="{{ $supplier->observation }}">
+                                        Editar
+                                </button>
+                            </li>
                             <li>
                                 @if ($supplier->status_id == 1)
                                     <form action="{{ route('suppliers.inactivate', $supplier->id) }}" method="POST" class="d-inline">
@@ -130,6 +142,72 @@
     </div>
 
 @include('suppliers.partials.create')
+@include('suppliers.partials.edit')
 @include('layouts.components.alert')
+
+@section('scripts')
+
+    @if ($errors->any())
+        <script>
+            window.onload = function() {
+                var newUserModal = new bootstrap.Modal(document.getElementById('NewSupplier'));
+                newUserModal.show();
+            }
+        </script>
+    @endif
+
+
+   @if ($errors->edit->any())
+<script>
+    window.onload = function() {
+        var editModal = new bootstrap.Modal(document.getElementById('EditSuppliers'));
+
+        document.getElementById('editName').value = "{{ old('name') }}";
+        document.getElementById('editEmail').value = "{{ old('email') }}";
+        document.getElementById('editPhone').value = "{{ old('phone') }}";
+        document.getElementById('editObservation').value = "{{ old('observation') }}";
+        document.getElementById('supplierID').value = "{{ old('id') }}";
+
+        const form = document.getElementById('editSuppliersForm');
+        form.action = form.action.replace('__ID__', "{{ old('id') }}");
+
+        editModal.show();
+    };
+</script>
+@endif
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('EditSuppliers');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+
+                // Recupera os dados dos atributos do botão
+                const id = button.getAttribute('data-supplier-id');
+                const name = button.getAttribute('data-supplier-name');
+                const email = button.getAttribute('data-supplier-email');
+                const phone = button.getAttribute('data-supplier-phone');
+                const observation = button.getAttribute('data-supplier-observation');
+
+                // Preenche os campos
+                document.getElementById('supplierID').value = id;
+                document.getElementById('editName').value = name;
+                document.getElementById('editEmail').value = email;
+                document.getElementById('editPhone').value = phone;
+                document.getElementById('editObservation').value = observation;
+
+                // Atualiza a rota de edição com o ID correto
+                const form = document.getElementById('editSuppliersForm');
+                form.action = form.action.replace('__ID__', id);
+            });
+        }
+    });
+</script>
+
+@endsection
 
 @endsection
