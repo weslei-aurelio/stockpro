@@ -17,7 +17,7 @@ class SupplierController extends Controller
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');
             })
-            ->paginate(10);
+            ->simplePaginate(10);
         return view('suppliers.index', compact('suppliers'));
     }
 
