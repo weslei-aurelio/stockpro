@@ -14,14 +14,14 @@
     @endsession
     <div class="container mt-4">
         <div class="row align-items-center mb-5">
-            <div class="col-md-6">
-                <h1 class="m-0">Relatório de movimentação</h1>
-            </div>
-            <div class="col-md-3 offset-md-3">
-                <form id="form-search" action="{{ route('movementReport.index') }}" method="GET">
-                     <input type="hidden" name="inicio" value="{{ date_mask(Request::get('inicio')) }}" />
+        <div class="col-md-6 d-flex align-items-center">
+        <h1 class="m-0">Relatório de movimentação</h1>
+        </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <form id="form-search" action="{{ route('movementReport.index') }}" method="GET" class="d-flex">
+                    <input type="hidden" name="inicio" value="{{ date_mask(Request::get('inicio')) }}" />
                     <input type="hidden" name="fim" value="{{ date_mask(Request::get('fim')) }}" />
-                    <input type="text" id="periodo" name="periodo" class=" form-control" placeholder="Período" value="{{ old('periodo') }}"  style="min-width: 229px;">
+                    <input type="text" id="periodo" name="periodo" class="form-control" placeholder="Período" value="{{ old('periodo') }}" style="min-width: 229px;">
                 </form>
             </div>
         </div>

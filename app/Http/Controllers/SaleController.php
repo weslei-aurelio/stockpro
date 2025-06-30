@@ -14,7 +14,7 @@ class SaleController extends Controller
         $inicio = null;
         $fim    = null;
 
-        if (! empty($filterPeriodo)) {
+        if (!empty($filterPeriodo)) {
             $periodo = explode(' até ', $filterPeriodo);
             try {
                 $de = Carbon::createFromFormat('d/m/Y', $periodo[0])->format('Y-m-d');
@@ -46,7 +46,6 @@ class SaleController extends Controller
         }
 
         $itens = $this->getItensSalePeriod($inicio, $fim);
-        
         $totalLucro = $this->calculateProfitItemsSale($inicio, $fim);
 
         return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
