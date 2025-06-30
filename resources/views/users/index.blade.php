@@ -58,9 +58,9 @@
 
             @if(request('keyword') && $users->isEmpty())
                 <div class="d-flex align-items-center gap-2 mt-3">
-                    <h4 class="mb-0">
+                    <h5 class="mb-0">
                         Nenhum usuário cadastrado com a busca <strong>{{ $keyword }}</strong>.
-                    </h4>
+                    </h5>
                     <a href="/users" class="btn btn-danger" title="Limpar busca">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
