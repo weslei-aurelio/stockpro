@@ -11,7 +11,7 @@
         <div class="container mt-4">
             <table class="table table-bordered table-striped table-hover">
             <thead class="table-primary">
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Código do produto</th>
                     <th scope="col">Produto</th>
                     <th scope="col">Unidades vendidas</th>
