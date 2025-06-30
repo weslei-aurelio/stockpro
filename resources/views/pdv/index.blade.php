@@ -20,7 +20,7 @@
     <div class="row align-items-end mb-3">
         <div class="col-md-6">
             <label for="selectedProduct" class="form-label"></label>
-            <input type="text" class="form-control" id="selectedProduct" placeholder="Ex: Cerveja Brahma">
+            <input type="text" class="form-control" id="selectedProduct">
             <input type="hidden" id="selectedProductId">
         </div>
         <div class="col-md-3">
