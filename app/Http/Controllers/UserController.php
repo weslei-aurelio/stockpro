@@ -83,7 +83,7 @@ class UserController extends Controller
         $user->status_id = Status::SUSPENSO;
         $user->save();
 
-        request()->session()->flash('sucess', 'Usuário inativado com sucesso');
+        request()->session()->flash('success', 'Usuário inativado com sucesso');
         return redirect()->route('users.index');
     }
 

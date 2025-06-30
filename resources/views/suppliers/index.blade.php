@@ -79,7 +79,6 @@
                     <th scope="col">Nome / Razão Social</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Telefone</th>
-                    <th scope="col">Observações</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
                 </tr>
@@ -90,7 +89,6 @@
                         <td>{{ $supplier->name }}</td>
                         <td>{{ $supplier->email }}</td>
                         <td>{{ $supplier->phone }}</td>
-                        <td><a href="#">Ver observações</a></td>
                         @if($supplier->status_id == 1)
                             <td class="text-success">{{ $supplier->status->name }}</td>
                         @else
