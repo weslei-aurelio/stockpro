@@ -3,11 +3,14 @@
 @section('title', 'Produtos Mais Vendidos | StockPRO')
 
 @section('content')
-    <div class="container my-3">
-        <x-date-range-filter action="/best-selling-products" />
-    </div>
     <div class="container mt-4">
-        <h1>Produtos mais vendidos</h1>
+        <div class="row align-items-center mb-5">
+        <div class="col-md-6 d-flex align-items-center">
+        <h1 class="m-0">Produtos mais vendidos</h1>
+        </div>
+            <div class="col-md-6 d-flex justify-content-end">
+            </div>
+        </div>
         <div class="container mt-4">
             <table class="table table-bordered table-striped table-hover">
             <thead class="table-primary">
@@ -22,7 +25,7 @@
             <tbody>
                 @foreach ($products as $product)
                     <tr>
-                        <th>{{ $product->product_id }}</th>
+                        <td>{{ $product->product_id }}</th>
                         <td>{{ $product->description }}</td>
                         <td>{{ $product->total_vendido }}</td>
                         <td>{{ number_format($product->profitMargin, 2, ',', '.') }}%</td>
@@ -31,6 +34,7 @@
                 @endforeach
             </tbody>
             </table>
+            {{ $products->links() }}
         </div>
     </div>
 @endsection

@@ -32,7 +32,6 @@
                     aria-label="Search"
                 />
                 <button class="btn btn-primary me-2" type="submit">
-                <button class="btn btn-primary me-2" type="submit">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         width="16" 

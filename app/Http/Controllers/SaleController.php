@@ -64,7 +64,7 @@ class SaleController extends Controller
             ->groupBy('product_id', 'products.description', 'products.profitMargin')
             ->addSelect('products.description', 'products.profitMargin')
             ->orderByDesc('total_vendido')
-            ->get();
+            ->simplePaginate(10);
 
        return view('sales.reports.best_selling_products.index', compact('products')); 
     }
