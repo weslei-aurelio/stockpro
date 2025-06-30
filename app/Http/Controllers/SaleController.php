@@ -14,6 +14,8 @@ class SaleController extends Controller
         $inicio = null;
         $fim    = null;
 
+        $request->session()->forget('error');
+
         if (!empty($filterPeriodo)) {
             $periodo = explode(' até ', $filterPeriodo);
             try {
@@ -45,7 +47,7 @@ class SaleController extends Controller
             return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
         }
 
-        $itens = $this->getItensSalePeriod($inicio, $fim);
+        $itens = $this->getItensSalePeriod($request, $inicio, $fim);
         $totalLucro = $this->calculateProfitItemsSale($inicio, $fim);
 
         return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
@@ -67,17 +69,14 @@ class SaleController extends Controller
        return view('sales.reports.best_selling_products.index', compact('products')); 
     }
 
-    private function getItensSalePeriod($inicio, $fim) 
+    private function getItensSalePeriod($request, $inicio, $fim) 
     {
         return SaleItem::with(['product', 'sale'])
                 ->where('created_at', '>=', $inicio.' 00:00:00')
                 ->where('created_at', '<=', $fim.' 23:59:59')
                 ->orderBy('created_at', 'asc')
                 ->simplePaginate(10)
-                ->appends([
-                    'inicio' => $inicio,
-                    'fim' => $fim,
-                ]);
+                ->appends($request->query());
     }
 
     private function calculateProfitItemsSale($inicio, $fim) 
