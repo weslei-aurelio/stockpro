@@ -31,7 +31,7 @@
                     placeholder="Nome do produto" 
                     aria-label="Search"
                 />
-                <button class="btn btn-primary" type="submit">
+                <button class="btn btn-primary me-2" type="submit">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         width="16" 
@@ -61,7 +61,7 @@
             @if(request('keyword') && $products->isEmpty())
                 <div class="d-flex align-items-center gap-2 mt-3">
                     <h4 class="mb-0">
-                        Nenhum fornecedor cadastrado com a busca <strong>{{ $keyword }}</strong>.
+                        Nenhum produto cadastrado com a busca <strong>{{ $keyword }}</strong>.
                     </h4>
                     <a href="/products" class="btn btn-danger" title="Limpar busca">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
