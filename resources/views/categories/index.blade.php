@@ -17,7 +17,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1><strong>Categorias</strong></h1>
             <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewCategories">
-                Nova Categoria
+                + Nova Categoria
             </button>
         </div>
 
@@ -55,7 +55,7 @@
             @if(request('keyword') && $categories->isEmpty())
                 <div class="d-flex align-items-center gap-2 mt-3">
                     <h4 class="mb-0">
-                        Nenhum fornecedor cadastrado com a busca <strong>{{ $keyword }}</strong>.
+                        Nenhuma categoria cadastrada com a busca <strong>{{ $keyword }}</strong>.
                     </h4>
                     <a href="/categories" class="btn btn-danger" title="Limpar busca">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

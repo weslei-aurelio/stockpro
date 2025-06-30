@@ -77,6 +77,9 @@
                             class="form-control"  
                             placeholder="Confirmar Senha"
                         >
+                        <label for="passwordField">
+                            Confirmar Senha
+                        </label>
                     </div>
                     <div class="modal-footer">
                         <a 

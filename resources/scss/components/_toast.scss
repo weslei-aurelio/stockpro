@@ -23,6 +23,12 @@
   z-index: 1056; /* Um pouco mais alto que o container */
 }
 
+.toast-content.error {
+  background: linear-gradient(135deg, #dc3545, #c82333); /* tons de vermelho */
+  color: white;
+}
+
+
 .toast-content svg {
   flex-shrink: 0;
 }

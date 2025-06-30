@@ -18,7 +18,7 @@
             <strong>Marcas</strong>
         </h1>
         <button type="button" class="btn btn-primary custom-button text-white mb-4" data-bs-toggle="modal" data-bs-target="#NewBrand">
-            Nova Marca
+            + Nova Marca
         </button>
     </div>
     <nav class="navbar">
@@ -52,7 +52,7 @@
             @if(request('keyword') && $brands->isEmpty())
                 <div class="d-flex align-items-center gap-2 mt-3">
                     <h4 class="mb-0">
-                        Nenhum fornecedor cadastrado com a busca <strong>{{ $keyword }}</strong>.
+                        Nenhuma marca cadastrada com a busca <strong>{{ $keyword }}</strong>.
                     </h4>
                     <a href="/brands" class="btn btn-danger" title="Limpar busca">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
