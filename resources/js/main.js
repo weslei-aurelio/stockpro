@@ -47,7 +47,7 @@ $(function(){
         mode: "range",
         locale: "pt",
         dateFormat: "d/m/Y",
-        onValueUpdate: function(selectedDates, inputValue, flatpickrInstance, dayElem){
+        onValueUpdate: function(selectedDates){
             if(selectedDates.length > 1){
                 $('#form-search').trigger('submit');
             }

@@ -14,31 +14,31 @@ class SaleController extends Controller
         $inicio = null;
         $fim    = null;
 
-        if (!empty($filterPeriodo)) {
-            $periodo = explode(' até ',$filterPeriodo);
-            try {
-                $de = Carbon::createFromFormat('d/m/Y', $periodo[0])->format('Y-m-d');
-                $ate = Carbon::createFromFormat('d/m/Y', isset($periodo[1]) ? $periodo[1] : $periodo[0])->format('Y-m-d');
-            }catch(\Exception $e) {
-                abort(404);
-            }
+        if (!empty($filterPeriodo) && str_contains($filterPeriodo, 'até')) {
+            $periodo = explode(' até ', $filterPeriodo);
 
-            $inicio = isset($de) ? $de : $inicio;
-            $fim    = isset($ate) ? $ate : $fim;
+            if (!empty($periodo[0]) && !empty($periodo[1])) {
+                try {
+                    $inicio = Carbon::createFromFormat('d/m/Y', trim($periodo[0]))->format('Y-m-d');
+                    $fim    = Carbon::createFromFormat('d/m/Y', trim($periodo[1]))->format('Y-m-d');
+                } catch (\Exception $e) {
+                    abort(404);
+                }
+            }
         }
 
-        $inicio = isset($inicio) ? $inicio : Carbon::now()->format('Y-m-d');
-        $fim    = isset($fim) ? $fim : Carbon::now()->format('Y-m-d'); 
-    
+        // Se não veio data ou deu erro, usa o dia atual
+        $inicio = $inicio ?? Carbon::now()->format('Y-m-d');
+        $fim    = $fim ?? Carbon::now()->format('Y-m-d');
+
         $request->merge([
             'inicio' => $inicio,
-            'fim'    =>  $fim
+            'fim'    => $fim
         ]);
 
         $diferencaEntreDatas = datetimeDifference($request->fim, $request->inicio);
         
         if ($diferencaEntreDatas > 60) {
-
             $itens = collect();
             $totalLucro = 0;
 
@@ -46,11 +46,13 @@ class SaleController extends Controller
             return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
         }
 
-        $itens      = $this->getItensSalePeriod($request->inicio, $request->fim);
+        $itens = $this->getItensSalePeriod($inicio, $fim)->appends([
+            'periodo' => $filterPeriodo ?? "{$inicio} até {$fim}"
+        ]);
+        
         $totalLucro = $this->calculateProfitItemsSale($inicio, $fim);
 
         return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
-        
     }
 
     public function bestSellingProducts() 
@@ -74,7 +76,7 @@ class SaleController extends Controller
         return SaleItem::with(['product', 'sale'])
                 ->where('created_at', '>=', $inicio.' 00:00:00')
                 ->where('created_at', '<=', $fim.' 23:59:59')
-                ->orderBy('created_at')
+                ->orderBy('created_at', 'asc')
                 ->simplePaginate(10)
                 ->appends([
                     'inicio' => $inicio,
