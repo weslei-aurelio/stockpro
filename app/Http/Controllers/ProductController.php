@@ -49,7 +49,7 @@ class ProductController extends Controller
             'purchaseValue' => 'required|string',
             'salePrice'     => 'required|string',
             'profitMargin'  => 'required|string',
-            'numberUnits'   => 'required|integer'
+            'numberUnits'   => 'required|integer|min:0'
         ]);
 
         if ($validator->fails()) {
@@ -78,10 +78,10 @@ class ProductController extends Controller
             'description'       => 'required|string',
             'brand_id'          => ['required', 'exists:brands,id'],
             'category_id'       => ['required', 'exists:categories,id'],
-            'purchaseValue' => 'required|string',
-            'salePrice'     => 'required|string',
-            'profitMargin'  => 'required|string',
-            'numberUnits'       => 'required|integer'
+            'purchaseValue'     => 'required|string',
+            'salePrice'         => 'required|string',
+            'profitMargin'      => 'required|string',
+            'numberUnits'       => 'required|integer|min:0'
         ]);
 
         if ($validator->fails()) {
