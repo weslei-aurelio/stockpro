@@ -10,7 +10,14 @@
             </div>
             <div class="col-md-3 offset-md-3">
                 <form id="form-search" action="{{ route('movementReport.index') }}" method="GET">
-                    <input type="text" id="periodo" name="periodo" class="date-picker form-control" placeholder="Período">
+                    <input 
+                        type="text" 
+                        id="periodo" 
+                        name="periodo" 
+                        class="form-control" 
+                        placeholder="Selecione o período"
+                        value="{{ old('periodo', request('periodo', \Carbon\Carbon::createFromFormat('Y-m-d', $inicio)->format('d/m/Y') . ' até ' . \Carbon\Carbon::createFromFormat('Y-m-d', $fim)->format('d/m/Y'))) }}"
+                    >
                 </form>
             </div>
         </div>
