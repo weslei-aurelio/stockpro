@@ -42,16 +42,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-$(function(){
-    flatpickr("#periodo", {
-        mode: "range",
-        locale: "pt",
-        dateFormat: "d/m/Y",
-        onValueUpdate: function(selectedDates){
-            if(selectedDates.length > 1){
-                $('#form-search').trigger('submit');
-            }
-        },
-    });
-});
-

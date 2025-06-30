@@ -10,14 +10,9 @@
             </div>
             <div class="col-md-3 offset-md-3">
                 <form id="form-search" action="{{ route('movementReport.index') }}" method="GET">
-                    <input 
-                        type="text" 
-                        id="periodo" 
-                        name="periodo" 
-                        class="form-control" 
-                        placeholder="Selecione o período"
-                        value="{{ old('periodo', request('periodo', \Carbon\Carbon::createFromFormat('Y-m-d', $inicio)->format('d/m/Y') . ' até ' . \Carbon\Carbon::createFromFormat('Y-m-d', $fim)->format('d/m/Y'))) }}"
-                    >
+                     <input type="hidden" name="inicio" value="{{ date_mask(Request::get('inicio')) }}" />
+                    <input type="hidden" name="fim" value="{{ date_mask(Request::get('fim')) }}" />
+                    <input type="text" id="periodo" name="periodo" class=" form-control" placeholder="Período" value="{{ old('periodo') }}"  style="min-width: 229px;">
                 </form>
             </div>
         </div>
@@ -57,3 +52,24 @@
     </div>
     @include('layouts.components.alert')
 @endsection
+
+@push('scripts')
+<script>
+    $(function(){
+    flatpickr("#periodo", {
+        static: true,
+        mode: "range",
+        locale: "pt",
+        dateFormat: "d/m/Y",
+        onValueUpdate: function(dObj, dStr, fp, dayElem){
+            if(dObj.length > 1){
+                $('#form-search').submit();
+            }
+        },
+        @if(isset($inicio) && isset($fim))
+            defaultDate: [$('[name="inicio"]').val(), $('[name="fim"]').val()]
+        @endif
+        });
+    });
+</script>
+@endpush

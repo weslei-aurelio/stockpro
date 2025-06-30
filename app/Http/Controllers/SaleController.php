@@ -14,22 +14,21 @@ class SaleController extends Controller
         $inicio = null;
         $fim    = null;
 
-        if (!empty($filterPeriodo) && str_contains($filterPeriodo, 'até')) {
+        if (! empty($filterPeriodo)) {
             $periodo = explode(' até ', $filterPeriodo);
-
-            if (!empty($periodo[0]) && !empty($periodo[1])) {
-                try {
-                    $inicio = Carbon::createFromFormat('d/m/Y', trim($periodo[0]))->format('Y-m-d');
-                    $fim    = Carbon::createFromFormat('d/m/Y', trim($periodo[1]))->format('Y-m-d');
-                } catch (\Exception $e) {
-                    abort(404);
-                }
+            try {
+                $de = Carbon::createFromFormat('d/m/Y', $periodo[0])->format('Y-m-d');
+                $ate = Carbon::createFromFormat('d/m/Y', isset($periodo[1]) ? $periodo[1] : $periodo[0])->format('Y-m-d');
+            } catch (\Exception $e) {
+                abort(404);
             }
+
+            $inicio = isset($de) ? $de : $inicio;
+            $fim = isset($ate) ? $ate : $fim;
         }
 
-        // Se não veio data ou deu erro, usa o dia atual
-        $inicio = $inicio ?? Carbon::now()->format('Y-m-d');
-        $fim    = $fim ?? Carbon::now()->format('Y-m-d');
+        $inicio = isset($inicio) ? $inicio : Carbon::yesterday()->format('Y-m-d');
+        $fim = isset($fim) ? $fim : Carbon::now()->format('Y-m-d');
 
         $request->merge([
             'inicio' => $inicio,
@@ -46,9 +45,7 @@ class SaleController extends Controller
             return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
         }
 
-        $itens = $this->getItensSalePeriod($inicio, $fim)->appends([
-            'periodo' => $filterPeriodo ?? "{$inicio} até {$fim}"
-        ]);
+        $itens = $this->getItensSalePeriod($inicio, $fim);
         
         $totalLucro = $this->calculateProfitItemsSale($inicio, $fim);
 
