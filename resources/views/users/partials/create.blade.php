@@ -70,14 +70,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-floating mb-3 position-relative">
-                        <input 
-                            type="password" 
-                            name="password_confirmation" 
-                            class="form-control"  
-                            placeholder="Confirmar Senha"
-                        >
-                    </div>
                     <div class="modal-footer">
                         <a 
                             href="/users" 
