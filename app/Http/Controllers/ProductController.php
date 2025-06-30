@@ -17,6 +17,7 @@ class ProductController extends Controller
     $categories = Category::all();
 
     $products = Product::with('category')
+        ->orderBy('status_id')
         ->orderBy('category_id')
         ->when($request->keyword, function ($query, $keyword) {
             $query->where('description', 'like', '%' . $keyword . '%');
