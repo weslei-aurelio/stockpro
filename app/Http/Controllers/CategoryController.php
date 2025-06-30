@@ -13,7 +13,6 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = Category::query()
-            ->orderBy('status_id')
             ->orderBy('name')
             ->when($request->keyword, function ($query, $keyword) {
                 $query->where('name', 'like', '%' . $keyword . '%');

@@ -289,6 +289,7 @@ return [
         'profitMargin'  => 'lucro desejado (%)',
         'salePrice'     => 'valor de venda',
         'numberUnits'   => 'quantidade de unidades',
-        'password'      => 'senha'
+        'password'      => 'senha',
+        'phone'         => 'telefone'
     ],
 ];

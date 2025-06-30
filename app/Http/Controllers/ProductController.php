@@ -12,12 +12,11 @@ use App\Models\Status;
 class ProductController extends Controller
 {
     public function index(Request $request)
-{
+    {
     $brands     = Brand::all();
     $categories = Category::all();
 
     $products = Product::with('category')
-        ->orderBy('status_id')
         ->orderBy('category_id')
         ->when($request->keyword, function ($query, $keyword) {
             $query->where('description', 'like', '%' . $keyword . '%');
@@ -27,7 +26,7 @@ class ProductController extends Controller
     $keyword = $request->keyword; 
 
     return view('product.index', compact('brands', 'categories', 'products', 'keyword'));
-}
+    }
 
 
     public function create () 
@@ -65,6 +64,7 @@ class ProductController extends Controller
         $product->salePrice     = formatToDecimal($request->salePrice);
         $product->profitMargin  = formatToDecimal($request->profitMargin);
         $product->numberUnits   = $request->numberUnits;
+        $product->status_id     = Status::ATIVO;
 
         $product->save();
 
