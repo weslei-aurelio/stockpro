@@ -2,7 +2,16 @@
 
 @section('title', 'Relatório de Movimentação | StockPRO')
 
+@push('index-css')
+    @vite('resources/scss/index.scss')
+@endpush
+
 @section('content')
+    @session('status')
+        <div class="alert alert-success text-center" role="alert">
+            {{ $value }}
+        </div>
+    @endsession
     <div class="container mt-4">
         <div class="row align-items-center mb-5">
             <div class="col-md-6">
@@ -16,7 +25,7 @@
                 </form>
             </div>
         </div>
-            <table class="table table-bordered table-striped table-hover">
+        <table class="table table-bordered table-striped table-hover">
             <thead class="table-primary ">
                 <tr class="text-center">
                     <th scope="col">Data de venda</th>
@@ -47,8 +56,10 @@
                         <td class="text-success"><strong>R$ {{ number_format($totalLucro, 2, ',', '.') }}</strong></td>
                     </tr>
                 </tfoot>
-            </table>
-        {{ $itens->links() }}
+        </table>
+        @if ($itens instanceof \Illuminate\Pagination\LengthAwarePaginator || $itens instanceof \Illuminate\Pagination\Paginator)
+            {{ $itens->links() }}
+        @endif
     </div>
     @include('layouts.components.alert')
 @endsection

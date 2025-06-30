@@ -37,11 +37,11 @@ class SaleController extends Controller
 
         $diferencaEntreDatas = datetimeDifference($request->fim, $request->inicio);
         
-        if ($diferencaEntreDatas > 60) {
+        if ($diferencaEntreDatas > 90) {
             $itens = collect();
             $totalLucro = 0;
 
-            request()->session()->flash('error', 'Período máximo permitido: 60 dias');
+            request()->session()->flash('error', 'Período máximo permitido: 90 dias');
             return view('sales.reports.movements.index', compact('itens', 'totalLucro', 'inicio', 'fim'));
         }
 

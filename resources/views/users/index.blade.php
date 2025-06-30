@@ -42,7 +42,7 @@
                             />
                         </svg>
                     </button>
-                     @if(request('keyword') && $users->isNotEmpty())
+                    @if(request('keyword') && $users->isNotEmpty())
                         <a href="/users" class="btn btn-danger" title="Limpar busca">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
