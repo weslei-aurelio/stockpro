@@ -27,7 +27,9 @@
                             class="form-control @error('name', 'edit') is-invalid @enderror"
                             id="editName"
                             value="{{ old('name')}} "
+                            placeholder="Nome"
                         >
+                        <label class="floatingInput">Nome Completo</label>
                         @error('name', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -41,7 +43,9 @@
                             class="form-control @error('email', 'edit') is-invalid @enderror"
                             id="editEmail"
                             value="{{ old('email') }}"
+                            placeholder="Endereço de E-mail"
                         >
+                        <label class="floatingInput">Endereço de E-mail</label>
                         @error('email', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -49,12 +53,13 @@
                         @enderror
                     </div>
                     <div class="form-floating mb-3">
-                        <label class="floatingInput">Senha</label>
                         <input
                             type="password"
                             name="password"
                             class="form-control @error('password', 'edit') is-invalid @enderror"
+                            placeholder="Senha"
                         >
+                        <label class="floatingInput">Senha</label>
                         @error('password', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -62,13 +67,14 @@
                         @enderror
                     </div>
                     <div class="form-floating mb-3">
-                        <label class="floatingInput">Confirmar Senha</label>
                         <input
                             type="password" 
                             name="password_confirmation" 
                             class="form-control" 
                             class="form-control @error('password', 'edit') is-invalid @enderror"
+                            placeholder="Confirmar Senha"
                         >
+                        <label class="floatingInput">Confirmar Senha</label>
                         @error('password', 'edit')
                             <div class="invalid-feedback">
                                 {{ $message }}
